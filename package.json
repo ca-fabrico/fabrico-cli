@@ -1,0 +1,70 @@
+{
+  "version": "0.0.0",
+  "name": "fabrico",
+  "author": "Code Architects (Code Arc Ltd)",
+  "description": "A command-line seed app built with TypeScript and Node.js.",
+  "keywords": [
+    "node",
+    "typescript",
+    "seed",
+    "cli"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://tfs.codearchitects.com:8088/tfs/Code%20Architects/CA-DevOps/_git/fabrico"
+  },
+  "preferGlobal": true,
+  "main": "./bin/fabrico.js",
+  "bin": {
+    "fabrico": "./bin/fabrico.js"
+  },
+  "engines": {
+    "node": ">= 8.0.0",
+    "npm": ">= 5.4.0"
+  },
+  "scripts": {
+    "clean": "npm run clean.artifacts && npm run clean.node_modules",
+    "clean.artifacts": "node rimraf.js dist logs",
+    "clean.node_modules": "node rimraf.js node_modules",
+    "setup": "npm install",
+    "build": "tsc && cpr package.json dist/package.json -o",
+    "build.test": "npm run clean.artifacts && tsc -p tsconfig.debug.json --outDir dist",
+    "test": "nyc -e .ts -x bin -x lib/**/*.spec.ts mocha -r ts-node/register lib/**/*.spec.ts",
+    "integration-test": "echo integration-test",
+    "deploy": "echo deploy",
+    "start": "node ./dist/bin/index.js",
+    "link": "cd dist && npm link",
+    "unlink": "cd dist && npm unlink"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.6",
+    "@types/commander": "^2.12.2",
+    "@types/core-js": "^2.5.0",
+    "@types/inquirer": "0.0.43",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.0",
+    "@types/ora": "^1.3.4",
+    "chai": "^4.2.0",
+    "cpr": "^3.0.1",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.4",
+    "nyc": "^13.1.0",
+    "rimraf": "^2.6.2",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.3"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^2.19.0",
+    "core-js": "^2.5.7",
+    "inquirer": "^6.2.0",
+    "inversify": "^5.0.1",
+    "inversify-binding-decorators": "^4.0.0",
+    "js-yaml": "^3.12.0",
+    "log4js": "^3.0.6",
+    "ora": "^3.0.0",
+    "reflect-metadata": "^0.1.12"
+  }
+}

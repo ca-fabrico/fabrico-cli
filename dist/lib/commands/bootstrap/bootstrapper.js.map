@@ -1,0 +1,1 @@
+{"version":3,"file":"bootstrapper.js","sourceRoot":"","sources":["../../../../lib/commands/bootstrap/bootstrapper.ts"],"names":[],"mappings":";;AAEA,kCAAsC;AACtC,yCAAsC;AAEtC,MAAM,YAAY;IAET,MAAM,CAAC,SAAoB;QAChC,SAAS,CAAC,IAAI,CAAc,mBAAQ,CAAC,WAAW,CAAC,CAAC,EAAE,CAAC,kBAAW,CAAC,CAAC,gBAAgB,EAAE,CAAC;IACvF,CAAC;CAEF;AAED,MAAM,YAAY,GAAG,IAAI,YAAY,EAAE,CAAC;AAC/B,oCAAY"}
