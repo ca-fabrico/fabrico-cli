@@ -24,5 +24,6 @@ $ fabrico help
     root [options]             print the root folder of the fabrico project to standard out
     validate [options]         validate the input file
     targets [options]          list the configured targets
-    gen [options]              run the generations process
+    gen [options]              run the generation process
+    gen [options] <target>     run the generation process for the input target
 ```
