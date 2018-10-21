@@ -13,5 +13,5 @@ xxx
 # targets
 xxx
 
-# run
+# gen
 xxx
