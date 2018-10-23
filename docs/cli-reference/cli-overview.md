@@ -1,7 +1,5 @@
 # CLI Overview
 
-# Reference
-
 Running `fabrico help` displays a usage summary:
 
 ```bash
