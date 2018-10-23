@@ -1,7 +1,7 @@
 {
   "version": "0.0.0",
   "name": "fabrico",
-  "author": "Code Architects (Code Arc Ltd)",
+  "author": "Code Architects",
   "description": "A command-line seed app built with TypeScript and Node.js.",
   "keywords": [
     "node",
@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://tfs.codearchitects.com:8088/tfs/Code%20Architects/CA-DevOps/_git/fabrico"
+    "url": "https://tfs.codearchitects.com:8088/tfs/Code%20Architects/CA-Fabrico/_git/fabrico-cli"
   },
   "preferGlobal": true,
   "main": "./bin/fabrico.js",
