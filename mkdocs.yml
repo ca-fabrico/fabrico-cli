@@ -1,0 +1,44 @@
+site_name: ca-bakery-cli
+site_url: https://tfs.codearchitects.com:8088/tfs/Code%20Architects/CA-Fabrico/_git/fabrico-cli
+site_description: CLI for application using `ca-bakery`
+site_author: Code Arc Ltd
+
+repo_url: https://tfs.codearchitects.com:8088/tfs/Code%20Architects/CA-Fabrico/_git/fabrico-cli
+edit_uri: ""
+
+pages:
+    - Overview: index.md
+    - Guides:
+        - Getting started: guides/getting-started.md
+        - Concepts:
+            - Overview: guides/concepts/concepts-overview.md
+        - Samples:
+            - Angular: guides/samples/angular-sample.md
+            - React + Node.js: guides/samples/react-node-sample.md
+            - Angular + NetCore: guides/samples/angular-netcore-sample.md
+            - iOS/Swift: guides/samples/ios-swift-sample.md
+    - Reference:
+        - Yaml Reference: references/ca-bakery-cli-yml.md
+    - CLI Reference:
+        - Overview: cli-reference/cli-overview.md
+        - Commands: cli-reference/cli-commands.md
+    - FAQ: faq/index.md
+    - Contributor Guide:
+        - Sample doc: contributor/sample-page.md
+
+theme: readthedocs
+
+extra_css:
+    - css/extra.css
+
+markdown_extensions:
+    - toc:
+        permalink: 
+    - admonition
+    - def_list
+
+copyright: Copyright &copy; 2017 <a href="http://www.codearchitects.com">Code Architects</a>.
+google_analytics:
+
+plugins:
+    - search

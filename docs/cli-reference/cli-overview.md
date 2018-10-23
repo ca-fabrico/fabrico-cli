@@ -7,10 +7,10 @@ Running `fabrico help` displays a usage summary:
 ```bash
 $ fabrico help
 
- Usage: fabrico [options] [command]
+  Usage: fabrico [options] [command]
 
- Fabrico is a tool compliant to the Fabrico Manifest for Enterprise Applications Development. 
- This manifest intends to outline a methodology for enterprise applications development based on enhanced Proof of Concepts and code generation.
+  Fabrico is a tool compliant to the Fabrico Manifest for Enterprise Applications Development.
+  This manifest intends to outline a methodology for enterprise applications development based on enhanced Proof of Concepts and code generation.
 
   Options:
 
