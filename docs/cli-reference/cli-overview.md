@@ -24,4 +24,5 @@ $ fabrico help
     targets [options]          list the configured targets
     gen [options]              run the generation process
     gen [options] <target>     run the generation process for the input target
+    doctor [options]           run a sanity check
 ```
