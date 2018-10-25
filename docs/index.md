@@ -12,12 +12,14 @@ version: 1.0
       path: ./bff-api
       seed:
         name: '@ca-foundation/microservices'
-        version: ~> 3.2.5
+        type: npm
+        version: ^3.2.5
         language: nodejs
     - name: ms-notification
       path: ./ms-notification
       seed:
         name: '@ca-foundation/microservices'
-        version: ~> 3.2.5
+        type: npm
+        version: ^3.2.5
         language: netcore
 ```
