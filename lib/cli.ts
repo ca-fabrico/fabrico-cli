@@ -20,7 +20,7 @@ let validCommand = true;
 
 commander
   .version(pjson.version)
-  .description('The fabrico command line interface (CLI) is a tool to be used for configuring and interacting with fabrico. This tool can be used from the command line / shell of various operating systems.');
+  .description('Fabrico is a tool compliant to the Fabrico Manifest for Enterprise Applications Development.\nThis manifest intends to outline a methodology for enterprise applications development based on enhanced Proof of Concepts and code generation.');
 
 commander
   .command('init')
