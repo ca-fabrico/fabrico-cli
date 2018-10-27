@@ -1,9 +1,13 @@
 import { injectable } from 'inversify';
+import { Generator } from 'fabrico';
 
 @injectable()
 export class InitCommand {
 
   public async initialize(): Promise<void> {
+    const gen = new Generator('pippo');
+    const x = gen.foo3();
+    console.log(gen.foo());
     Promise.resolve(123)
     .then((res) => {
         throw new Error('something bad happened'); // throw a synchronous error
