@@ -30,15 +30,15 @@ commander
   .option('-f, --force', 'force initialization')
   .option('--target-path', 'target path')
   .action((options) => {
-    const questions = (options.force === true) ? [] : initQuestions.getAllInitializationQuestions();
+    const questions = (options.default === true) ? [] : initQuestions.getAllInitializationQuestions();
     inquirer.prompt(questions)
     .then((answers) => {
       initActions.initialize(answers)
         .then(() => {
-          console.log(chalk.yellow('your project is now initialized \u{1F37A}\u{1F37A}\u{1F37A}'));
+          console.log(chalk.yellow('Your project is now initialized \u{1F37A}\u{1F37A}\u{1F37A}'));
         })
         .catch((ex) => {
-          console.log(chalk.red('your project initialization failed \u{1F525}\u{1F525}, see above'));
+          console.log(chalk.red('Your project initialization failed \u{1F525}\u{1F525}, see above'));
         });
     });
 });
@@ -61,7 +61,7 @@ commander
   .option('--target-path', 'target path')
   .action((options) => {
     console.log('options:' + options.file );
-    console.error(chalk.red('not implemented yet!'));
+    console.error(chalk.red('not implemented yet! \u{1F525}\u{1F525}'));
     process.exit(1);
 });
 
@@ -73,7 +73,7 @@ commander
   .option('--target-path', 'target path')
   .action((options) => {
     console.log('options:' + options.verbose);
-    console.error(chalk.red('not implemented yet!'));
+    console.error(chalk.red('not implemented yet! \u{1F525}\u{1F525}'));
     process.exit(1);
 });
 
@@ -85,7 +85,7 @@ commander
 .action((command, options) => {
   console.error('command:' + command);
   console.log('options:' + options.verbose);
-  console.error(chalk.red('not implemented yet!'));
+  console.error(chalk.red('not implemented yet! \u{1F525}\u{1F525}'));
   process.exit(1);
 });
 
@@ -97,7 +97,7 @@ commander
 .option('--target-path', 'target path')
 .action((options) => {
   console.log('options:' + options.verbose + ',' + options.force);
-  console.error(chalk.red('not implemented yet!'));
+  console.error(chalk.red('not implemented yet! \u{1F525}\u{1F525}'));
   process.exit(1);
 });
 
@@ -110,7 +110,7 @@ commander
 .action((command, options) => {
   console.error('command:' + command);
   console.log('options:' + options.verbose);
-  console.error(chalk.red('not implemented yet!'));
+  console.error(chalk.red('not implemented yet! \u{1F525}\u{1F525}'));
   process.exit(1);
 });
 
@@ -120,7 +120,7 @@ commander
 .option('-v, --verbose', 'verbose output')
 .action((options) => {
   console.log('options:' + options.verbose + ',' + options.list);
-  console.error(chalk.red('not implemented yet!'));
+  console.error(chalk.red('not implemented yet! \u{1F525}\u{1F525}'));
   process.exit(1);
 });
 
