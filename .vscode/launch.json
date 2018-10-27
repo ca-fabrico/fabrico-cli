@@ -10,7 +10,8 @@
       "request": "launch",
       "args": [
         "${workspaceRoot}/bin/index.ts",
-        "init"
+        "init",
+        "-f"
       ],
       "runtimeArgs": [
         "-r",

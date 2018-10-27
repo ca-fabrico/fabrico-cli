@@ -15,9 +15,9 @@
     "url": "https://tfs.codearchitects.com:8088/tfs/Code%20Architects/CA-Fabrico/_git/fabrico-cli"
   },
   "preferGlobal": true,
-  "main": "./bin/fabrico.js",
+  "main": "./bin/index.js",
   "bin": {
-    "fabrico": "./bin/fabrico.js"
+    "fabrico": "./bin/index.js"
   },
   "engines": {
     "node": ">= 8.0.0",

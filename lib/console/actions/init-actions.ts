@@ -8,12 +8,10 @@ import { InitCommand } from '../../commands/init/index';
 @injectable()
 export class InitActions {
 
-  constructor(
-    @inject(DI_TYPES.InitCommand) private initCommand: InitCommand
-  ) { }
+  constructor(@inject(DI_TYPES.InitCommand) private initCommand: InitCommand) { }
 
-  public async createRecipe(answers: any): Promise<void> {
-    const recipe = await this.initCommand.getRecipe();
+  public async initialize(answers: any): Promise<void> {
+    await this.initCommand.initialize();
   }
 
 }

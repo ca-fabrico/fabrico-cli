@@ -5,19 +5,19 @@ import { Questions, Question, Answers } from 'inquirer';
 @injectable()
 export class InitQuestions {
 
-  public getRecipeNameAndDescriptionQuestions(): Question[] {
+  public getNameAndDescriptionQuestions(): Question[] {
     return [
       {
         type: 'input',
-        name: 'recipe_name',
-        message: 'recipe name:',
+        name: 'name',
+        message: 'name:',
         validate: (input, answers) => {
           return true;
         }
       },
       {
         type: 'input',
-        name: 'recipe_description',
+        name: 'description',
         message: 'description:',
         validate: (input, answers) => {
           return true;
@@ -26,28 +26,18 @@ export class InitQuestions {
     ];
   }
 
-  public getRecipeAuthorQuestions(): Question[]  {
+  public getAuthorQuestions(): Question[]  {
     return [
       {
         type: 'input',
-        name: 'recipe_author',
+        name: 'author',
         message: 'author:'
       }
     ];
   }
 
-  public getRecipeVersionQuestions(): Question[]  {
-    return [
-      {
-        type: 'input',
-        name: 'recipe_version',
-        message: 'version:'
-      }
-    ];
-  }
-
-  public getAllRecipeQuestions(): Questions {
-    return [...this.getRecipeNameAndDescriptionQuestions(), ...this.getRecipeAuthorQuestions(), ...this.getRecipeVersionQuestions()];
+  public getAllInitializationQuestions(): Questions {
+    return [...this.getNameAndDescriptionQuestions(), ...this.getAuthorQuestions()];
   }
 
 }

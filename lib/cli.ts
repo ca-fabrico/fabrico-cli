@@ -11,26 +11,31 @@ import { DI_TYPES as CONSOLE_DI_TYPES } from './console/bootstrap/di-types';
 import { InitQuestions } from './console/questions/init-questions';
 import { InitActions } from './console/actions/init-actions';
 
+const pjson = require('../package.json');
+
 const initQuestions = container.get<InitQuestions>(CONSOLE_DI_TYPES.InitQuestions);
 const initActions = container.get<InitActions>(CONSOLE_DI_TYPES.InitActions);
 
 let validCommand = true;
 
 commander
-  .version('0.0.0')
-  .description('The fabrico-core command line interface (CLI) is a tool to be used for configuring and interacting with fabrico-core. This tool can be used from the command line / shell of various operating systems.');
+  .version(pjson.version)
+  .description('The fabrico command line interface (CLI) is a tool to be used for configuring and interacting with fabrico. This tool can be used from the command line / shell of various operating systems.');
 
 commander
   .command('init')
-  .description('interactively initialize a new fabrico-core project')
-  .option('-f, --force', 'use only defaults and not prompt you for any options')
+  .description('interactively initialize a new fabrico project')
+  .option('-v, --verbose', 'verbose output')
+  .option('-d, --default', 'use only defaults and not prompt you for any options')
+  .option('-f, --force', 'force initialization')
+  .option('--target-path', 'target path')
   .action((options) => {
-    inquirer.prompt(initQuestions.getAllRecipeQuestions())
+    const questions = (options.force === true) ? [] : initQuestions.getAllInitializationQuestions();
+    inquirer.prompt(questions)
     .then((answers) => {
-      initActions.createRecipe(answers)
+      initActions.initialize(answers)
         .then(() => {
           console.log(chalk.yellow('your project is now initialized \u{1F37A}\u{1F37A}\u{1F37A}'));
-
         })
         .catch((ex) => {
           console.log(chalk.red('your project initialization failed \u{1F525}\u{1F525}, see above'));
@@ -40,8 +45,9 @@ commander
 
 commander
   .command('root')
-  .description('print the root folder of the fabrico-core project to standard out')
+  .description('print the root folder of the fabrico project to standard out')
   .option('-v, --verbose', 'verbose output')
+  .option('--target-path', 'target path')
   .action((options) => {
     console.error(chalk.red('not implemented yet!'));
     process.exit(1);
@@ -51,7 +57,8 @@ commander
   .command('validate')
   .description('validate the input file')
   .option('-v, --verbose', 'verbose output')
-  .option('-f --file <name>', 'file to be validated', /^(all|bake|recipe)$/i, 'all')
+  .option('--file <name>', 'file to be validated', /^(all|fabrico)$/i, 'all')
+  .option('--target-path', 'target path')
   .action((options) => {
     console.log('options:' + options.file );
     console.error(chalk.red('not implemented yet!'));
@@ -59,20 +66,22 @@ commander
 });
 
 commander
-  .command('pipeline')
-  .description('list the configured pipelines')
+  .command('targets')
+  .description('list or create targets')
   .option('-v, --verbose', 'verbose output')
-  .option('-l, --list', 'list configured pipelines')
+  .option('-a, --add', 'add a target')
+  .option('--target-path', 'target path')
   .action((options) => {
-    console.log('options:' + options.verbose + ',' + options.list);
+    console.log('options:' + options.verbose);
     console.error(chalk.red('not implemented yet!'));
     process.exit(1);
 });
 
 commander
-.command('pipeline <name>')
-.description('run the input pipeline')
+.command('targets <name>')
+.description('show the input target info')
 .option('-v, --verbose', 'verbose output')
+.option('--target-path', 'target path')
 .action((command, options) => {
   console.error('command:' + command);
   console.log('options:' + options.verbose);
@@ -81,45 +90,36 @@ commander
 });
 
 commander
-.command('components')
-.description('list the configured components')
+.command('gen')
+.description('start the generation process')
 .option('-v, --verbose', 'verbose output')
-.option('-l, --list', 'list configured pipelines')
+.option('-f, --force', 'force initialization')
+.option('--target-path', 'target path')
 .action((options) => {
-  console.log('options:' + options.verbose + ',' + options.list);
+  console.log('options:' + options.verbose + ',' + options.force);
   console.error(chalk.red('not implemented yet!'));
   process.exit(1);
 });
 
 commander
-.command('artifacts')
-.description('list the configured artifacts')
+.command('gen <target>')
+.description('start the generation process for the input target')
 .option('-v, --verbose', 'verbose output')
-.option('-l, --list', 'list configured pipelines')
-.action((options) => {
-  console.log('options:' + options.verbose + ',' + options.list);
-  console.error(chalk.red('not implemented yet!'));
-  process.exit(1);
-});
-
-commander
-.command('run')
-.description('list the configured commands')
-.option('-v, --verbose', 'verbose output')
-.option('-l, --list', 'list configured commands')
-.action((options) => {
-  console.log('options:' + options.verbose + ',' + options.list);
-  console.error(chalk.red('not implemented yet!'));
-  process.exit(1);
-});
-
-commander
-.command('run <command>')
-.description('run the input command')
-.option('-v, --verbose', 'verbose output')
+.option('-f, --force', 'force initialization')
+.option('--target-path', 'target path')
 .action((command, options) => {
   console.error('command:' + command);
   console.log('options:' + options.verbose);
+  console.error(chalk.red('not implemented yet!'));
+  process.exit(1);
+});
+
+commander
+.command('doctor')
+.description('detect potential issues with the user environment')
+.option('-v, --verbose', 'verbose output')
+.action((options) => {
+  console.log('options:' + options.verbose + ',' + options.list);
   console.error(chalk.red('not implemented yet!'));
   process.exit(1);
 });

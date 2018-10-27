@@ -14,10 +14,10 @@ describe('InitCommand should', () => {
     sut = container.get<InitCommand>(DI_TYPES.InitCommand);
   });
 
-  it('get the recipe', async () => {
-    const recipe = await sut.getRecipe();
-    expect(recipe).to.exist;
-    expect(recipe).to.have.property('name').to.equal('ca-repo');
+  it('initilize', async () => {
+    const initilize = await sut.initialize();
+    //expect(initilize).to.exist;
+    //expect(initilize).to.have.property('name').to.equal('ca-repo');
   });
 
 });
