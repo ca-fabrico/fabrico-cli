@@ -5,7 +5,8 @@ import { Generator } from 'fabrico';
 export class InitCommand {
 
   public async initialize(): Promise<void> {
-    const gen = new Generator('pippo');
+    const seed = require('seed-ca-netcore-microservices');
+    const gen = new seed.SeedGenerator();
     const x = gen.foo3();
     console.log(gen.foo());
     Promise.resolve(123)

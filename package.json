@@ -36,10 +36,8 @@
     "start": "node ./dist/bin/index.js",
     "link": "cd dist && npm link",
     "unlink": "cd dist && npm unlink",
-    "wkb": "cd ../fabrico && npm run build && cd ../fabrico-cli && npm run build",
-    "wkbt": "cd ../fabrico && npm run build && cd ../fabrico-cli && npm run build.test",
-    "wkfbt": "cd ../fabrico && npm run build.test && npm run build &&  && cd ../fabrico-cli && npm run build.test",
-    "wktest": "cd ../fabrico && npm run build.test && npm run test && npm run build && npm run link && cd ../fabrico-cli && npm run build.test && npm run test"
+    "wkb": "cd ../fabrico-workspace && fabrico-cli-build.cmd",
+    "wktest": "cd ../fabrico-workspace && fabrico-cli-test.cmd"
   },
   "devDependencies": {
     "@types/chai": "^4.1.6",
@@ -69,7 +67,6 @@
     "js-yaml": "^3.12.0",
     "log4js": "^3.0.6",
     "ora": "^3.0.0",
-    "reflect-metadata": "^0.1.12",
-    "fabrico": "^0.0.0"
+    "reflect-metadata": "^0.1.12"
   }
 }

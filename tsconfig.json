@@ -12,7 +12,8 @@
       "dom"
     ],
     "types": [
-      "reflect-metadata"
+      "reflect-metadata",
+      "node"
     ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
