@@ -6,6 +6,8 @@ import { DI_TYPES } from '../../commands/bootstrap/di-types';
 import { InitCommand } from '../../commands/init/index';
 import { Metadata, Target } from 'fabrico';
 
+const os = require('os');
+
 @injectable()
 export class InitActions {
 
@@ -14,9 +16,9 @@ export class InitActions {
   public async initialize(verbose: boolean, force: boolean, workingPath: string, version: string, answers: any): Promise<void> {
     const metaData = new Metadata();
     metaData.version = version;
-    metaData.name = answers.name;
-    metaData.description = answers.description;
-    metaData.author = answers.author;
+    metaData.name = answers.name || 'fabrico-app';
+    metaData.description = answers.description || 'This is a Fabrico app';
+    metaData.author = answers.author || os.userInfo().username;
     const t1 = new Target();
     t1.name = 'target 1';
     t1.path = 'target_1';

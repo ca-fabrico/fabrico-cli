@@ -12,7 +12,7 @@
       "args": [
         "${workspaceRoot}/bin/index.ts",
         "init",
-        "-vf",
+        "-vfd",
         "--working-path=${workspaceRoot}\\tmp"
       ],
       "runtimeArgs": [
