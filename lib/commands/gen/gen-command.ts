@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { Generator } from 'fabrico';
+import { SeedGenerator } from 'fabrico';
 
 @injectable()
 export class GenCommand {
