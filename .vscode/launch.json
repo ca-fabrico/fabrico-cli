@@ -12,7 +12,8 @@
       "args": [
         "${workspaceRoot}/bin/index.ts",
         "init",
-        "-vf"
+        "-vf",
+        "--working-path=${workspaceRoot}\\tmp"
       ],
       "runtimeArgs": [
         "-r",
