@@ -3,7 +3,8 @@
  */
 const DI_TYPES = {
   InitActions: Symbol('InitActions'),
-  InitQuestions: Symbol('InitQuestions')
+  InitQuestions: Symbol('InitQuestions'),
+  GenActions: Symbol('GenActions')
 };
 
 export { DI_TYPES };

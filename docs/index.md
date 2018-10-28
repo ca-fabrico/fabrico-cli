@@ -7,6 +7,9 @@ All `fabrico` projects contain a file in the project root called `.fabrico.yml` 
 
 ```yml
 version: 1.0
+name: corporate-gateway
+description: Corporate Gateway
+author: Code Architects
 - targets:
     - name: bff-api
       path: ./bff-api

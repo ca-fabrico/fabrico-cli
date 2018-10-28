@@ -11,6 +11,7 @@ import { CliLogger } from '../logging/cli-logger';
 
 import { InitActions } from '../actions/init-actions';
 import { InitQuestions } from '../questions/init-questions';
+import { GenActions } from '../actions';
 
 class Bootstrapper implements IBootstrapper {
 
@@ -18,6 +19,7 @@ class Bootstrapper implements IBootstrapper {
     container.bind<ILogger>(CORE_DI_TYPES.Logger).to(CliLogger).inSingletonScope();
     container.bind<InitActions>(CONSOLE_DI_TYPES.InitActions).to(InitActions).inSingletonScope();
     container.bind<InitQuestions>(CONSOLE_DI_TYPES.InitQuestions).to(InitQuestions).inSingletonScope();
+    container.bind<GenActions>(CONSOLE_DI_TYPES.GenActions).to(GenActions).inSingletonScope();
   }
 
 }

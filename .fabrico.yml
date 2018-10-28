@@ -1,0 +1,9 @@
+version: 0.0.0
+name: a1
+description: b2
+author: d234
+targets:
+  - name: target 1
+    path: target_1
+  - name: target 2
+    path: target_2

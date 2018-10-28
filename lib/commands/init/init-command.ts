@@ -1,26 +1,27 @@
 import { injectable } from 'inversify';
-import { Generator } from 'fabrico';
+import { FabricoMetadata } from '../model';
+import * as fs from 'fs-extra';
+
+const yamlJs = require('js-yaml');
+const path = require('path');
 
 @injectable()
 export class InitCommand {
 
-  public async initialize(): Promise<void> {
-    const seed = require('seed-ca-netcore-microservices');
-    const gen = new seed.SeedGenerator(':)');
-    const x = gen.foo3();
-    console.log(gen.foo());
-    Promise.resolve(123)
-    .then((res) => {
-        throw new Error('something bad happened'); // throw a synchronous error
-        return 456;
-    })
-    .then((res) => {
-        console.log(res); // never called
-        return Promise.resolve(789);
-    })
-    .catch((err) => {
-        console.log(err.message); // something bad happened
-    });
+  public async initialize(verbose: boolean, force: boolean, workingPath: string, fabricoMetadata: FabricoMetadata): Promise<void> {
+    const yaml = yamlJs.safeDump(fabricoMetadata);
+    const filePath = path.join(workingPath, '.fabrico.yml');
+    const fileExist = await fs.pathExists(filePath);
+    if (fileExist) {
+      if (force) {
+        await fs.remove(filePath);
+      } else {
+        throw new Error(`File already exist (${filePath}).`);
+      }
+    } else {
+      await fs.createFile(filePath);
+    }
+    await fs.appendFile(filePath, yaml);
   }
 
 }

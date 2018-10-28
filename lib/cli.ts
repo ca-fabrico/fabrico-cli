@@ -10,11 +10,13 @@ import { DI_TYPES as CONSOLE_DI_TYPES } from './console/bootstrap/di-types';
 
 import { InitQuestions } from './console/questions/init-questions';
 import { InitActions } from './console/actions/init-actions';
+import { GenActions } from './console/actions/gen-actions';
 
 const pjson = require('../package.json');
 
 const initQuestions = container.get<InitQuestions>(CONSOLE_DI_TYPES.InitQuestions);
 const initActions = container.get<InitActions>(CONSOLE_DI_TYPES.InitActions);
+const genActions = container.get<GenActions>(CONSOLE_DI_TYPES.GenActions);
 
 let validCommand = true;
 
@@ -26,14 +28,18 @@ commander
   .command('init')
   .description('interactively initialize a new fabrico project')
   .option('-v, --verbose', 'verbose output')
-  .option('-d, --default', 'use only defaults and not prompt you for any options')
+  .option('-d, --defaults', 'use only defaults and not prompt you for any options')
   .option('-f, --force', 'force initialization')
-  .option('--target-path', 'target path')
+  .option('--working-path <path>', 'working path')
   .action((options) => {
-    const questions = (options.default === true) ? [] : initQuestions.getAllInitializationQuestions();
+    const optVerbose = options.verbose || false;
+    const optForce = options.force || false;
+    const optDefaults = options.defaults || false;
+    const optWorkingPath = options.workingPath || process.cwd();
+    const questions = (optDefaults === true) ? [] : initQuestions.getAllInitializationQuestions();
     inquirer.prompt(questions)
     .then((answers) => {
-      initActions.initialize(answers)
+      initActions.initialize(optVerbose, optForce, optWorkingPath, pjson.version, answers)
         .then(() => {
           console.log(chalk.yellow('Your project is now initialized \u{1F37A}\u{1F37A}\u{1F37A}'));
         })
@@ -47,7 +53,7 @@ commander
   .command('root')
   .description('print the root folder of the fabrico project to standard out')
   .option('-v, --verbose', 'verbose output')
-  .option('--target-path', 'target path')
+  .option('--working-path <path>', 'working path')
   .action((options) => {
     console.error(chalk.red('not implemented yet!'));
     process.exit(1);
@@ -58,7 +64,7 @@ commander
   .description('validate the input file')
   .option('-v, --verbose', 'verbose output')
   .option('--file <name>', 'file to be validated', /^(all|fabrico)$/i, 'all')
-  .option('--target-path', 'target path')
+  .option('--working-path <path>', 'working path')
   .action((options) => {
     console.log('options:' + options.file );
     console.error(chalk.red('not implemented yet! \u{1F525}\u{1F525}'));
@@ -70,7 +76,7 @@ commander
   .description('list or create targets')
   .option('-v, --verbose', 'verbose output')
   .option('-a, --add', 'add a target')
-  .option('--target-path', 'target path')
+  .option('--working-path <path>', 'working path')
   .action((options) => {
     console.log('options:' + options.verbose);
     console.error(chalk.red('not implemented yet! \u{1F525}\u{1F525}'));
@@ -78,40 +84,27 @@ commander
 });
 
 commander
-.command('targets <name>')
-.description('show the input target info')
-.option('-v, --verbose', 'verbose output')
-.option('--target-path', 'target path')
-.action((command, options) => {
-  console.error('command:' + command);
-  console.log('options:' + options.verbose);
-  console.error(chalk.red('not implemented yet! \u{1F525}\u{1F525}'));
-  process.exit(1);
-});
-
-commander
 .command('gen')
 .description('start the generation process')
 .option('-v, --verbose', 'verbose output')
 .option('-f, --force', 'force initialization')
-.option('--target-path', 'target path')
+.option('-t, --target', 'target of the generation')
+.option('--working-path <path>', 'working path')
 .action((options) => {
-  console.log('options:' + options.verbose + ',' + options.force);
-  console.error(chalk.red('not implemented yet! \u{1F525}\u{1F525}'));
-  process.exit(1);
-});
-
-commander
-.command('gen <target>')
-.description('start the generation process for the input target')
-.option('-v, --verbose', 'verbose output')
-.option('-f, --force', 'force initialization')
-.option('--target-path', 'target path')
-.action((command, options) => {
-  console.error('command:' + command);
-  console.log('options:' + options.verbose);
-  console.error(chalk.red('not implemented yet! \u{1F525}\u{1F525}'));
-  process.exit(1);
+  const optVerbose = options.verbose;
+  const optForce = options.force;
+  const optTarget = options.target;
+  const optWorkingPath = options.workingPath;
+  console.log(options);
+  genActions.generate()
+    .then((res) => {
+      console.log(chalk.yellow('Your project is now initialized \u{1F37A}\u{1F37A}\u{1F37A}'));
+      process.exit(0);
+    })
+    .catch((ex) => {
+      console.log(chalk.red('Your project initialization failed \u{1F525}\u{1F525}, see above'));
+      process.exit(0);
+    });
 });
 
 commander
