@@ -28,6 +28,7 @@
     "clean.artifacts": "node rimraf.js dist logs",
     "clean.node_modules": "node rimraf.js node_modules",
     "setup": "npm install",
+    "setup.box": "npm link fabrico && npm link seed-ca-netcore-microservices",
     "build": "tsc && cpr package.json dist/package.json -o",
     "build.test": "npm run clean.artifacts && tsc -p tsconfig.debug.json --outDir dist",
     "test": "nyc -e .ts -x bin -x lib/**/*.spec.ts mocha -r ts-node/register lib/**/*.spec.ts",
@@ -36,8 +37,9 @@
     "start": "node ./dist/bin/index.js",
     "link": "cd dist && npm link",
     "unlink": "cd dist && npm unlink",
-    "wkb": "cd ../fabrico-workspace && fabrico-cli-build.cmd",
-    "wktest": "cd ../fabrico-workspace && fabrico-cli-test.cmd"
+    "wkb": "cd ../fabrico-workspace && fabrico-code-workspace.cmd BUILD",
+    "wktest": "cd ../fabrico-workspace && fabrico-code-workspace.cmd TEST",
+    "gitpush": "cd ../fabrico-workspace && fabrico-code-workspace.cmd GIT_PUSH"
   },
   "devDependencies": {
     "@types/chai": "^4.1.6",
