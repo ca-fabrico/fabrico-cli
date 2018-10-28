@@ -41,3 +41,8 @@ dist
 
 # Visio
 **/*.~vsdx
+
+# Temp
+.fabrico.yml
+**/temp
+**/tmp

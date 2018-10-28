@@ -1,7 +1,0 @@
-version: 0.0.0
-name: a1
-description: b1
-author: c1
-targets:
-  - name: target 1
-    path: target_1

@@ -9,7 +9,7 @@ const path = require('path');
 export class InitCommand {
 
   public async initialize(verbose: boolean, force: boolean, workingPath: string, metaData: Metadata): Promise<void> {
-    const yaml = yamlJs.safeDump(Metadata);
+    const yaml = yamlJs.safeDump(metaData);
     const filePath = path.join(workingPath, '.fabrico.yml');
     const fileExist = await fs.pathExists(filePath);
     if (fileExist) {
