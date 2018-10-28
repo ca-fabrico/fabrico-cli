@@ -15,7 +15,7 @@ describe('InitCommand should', () => {
   });
 
   it('initilize', async () => {
-    const initilize = await sut.initialize();
+    const initilize = await sut.initialize(false, false, '', null);
     //expect(initilize).to.exist;
     //expect(initilize).to.have.property('name').to.equal('ca-repo');
   });

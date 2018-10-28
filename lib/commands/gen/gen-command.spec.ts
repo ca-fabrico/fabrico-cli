@@ -6,7 +6,7 @@ import { GenCommand } from './gen-command';
 
 const expect = chai.expect;
 
-describe('InitCommand should', () => {
+describe('GenCommand should', () => {
 
   let sut: GenCommand;
 
