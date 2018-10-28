@@ -39,7 +39,8 @@
     "unlink": "cd dist && npm unlink",
     "wkb": "cd ../fabrico-workspace && fabrico-code-workspace.cmd BUILD",
     "wktest": "cd ../fabrico-workspace && fabrico-code-workspace.cmd TEST",
-    "gitpush": "cd ../fabrico-workspace && fabrico-code-workspace.cmd GIT_PUSH"
+    "gitpush": "cd ../fabrico-workspace && fabrico-code-workspace.cmd GIT_PUSH",
+    "gitpush.amend": "cd ../fabrico-workspace && fabrico-code-workspace.cmd GIT_PUSH_AMEND"
   },
   "devDependencies": {
     "@types/chai": "^4.1.6",
