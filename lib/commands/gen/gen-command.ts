@@ -2,9 +2,9 @@ import { injectable } from 'inversify';
 import { Generator } from 'fabrico';
 
 @injectable()
-export class InitCommand {
+export class GenCommand {
 
-  public async initialize(): Promise<void> {
+  public async generate(): Promise<void> {
     const seed = require('seed-ca-netcore-microservices');
     const gen = new seed.SeedGenerator(':)');
     const x = gen.foo3();

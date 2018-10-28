@@ -4,15 +4,16 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "workspace-build",
+      "type": "shell",
+      "command": "npm run wkb",
+      "problemMatcher": []
+    },
+    {
       "label": "build-test",
-      "type": "npm",
-      "script": "test",
-      "problemMatcher": [
-          "$eslint-stylish"
-      ],
-      "presentation": {
-          "reveal": "never"
-      },
+      "type": "shell",
+      "command": "npm run build.test",
+      "problemMatcher": []
     }
   ]
 }
