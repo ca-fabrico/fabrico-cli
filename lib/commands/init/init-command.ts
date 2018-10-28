@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { FabricoMetadata } from '../model';
+import { FabricoMetadata } from 'fabrico';
 import * as fs from 'fs-extra';
 
 const yamlJs = require('js-yaml');

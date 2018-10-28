@@ -4,7 +4,7 @@ import { inject, injectable } from 'inversify';
 
 import { DI_TYPES } from '../../commands/bootstrap/di-types';
 import { InitCommand } from '../../commands/init/index';
-import { FabricoMetadata, Target } from '../../commands/model';
+import { FabricoMetadata, Target } from 'fabrico';
 
 @injectable()
 export class InitActions {
@@ -20,10 +20,7 @@ export class InitActions {
     const t1 = new Target();
     t1.name = 'target 1';
     t1.path = 'target_1';
-    const t2 = new Target();
-    t2.name = 'target 2';
-    t2.path = 'target_2';
-    fabricoMetadata.targets = [ t1, t2 ];
+    fabricoMetadata.targets = [ t1 ];
     await this.initCommand.initialize(verbose, force, workingPath, fabricoMetadata);
   }
 

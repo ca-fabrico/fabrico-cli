@@ -38,3 +38,6 @@ jspm_packages
 
 # Bake
 dist
+
+# Visio
+**/*.~vsdx
