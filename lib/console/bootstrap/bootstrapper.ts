@@ -2,11 +2,9 @@
 import { Container } from 'inversify';
 
 // modules
-import { IBootstrapper } from '../../core/bootstrap/bootstrapper.interface';
-import { DI_TYPES as CORE_DI_TYPES } from '../../core/bootstrap/di-types';
+import { IBootstrapper, ILogger,  DI_TYPES as CORE_DI_TYPES } from 'fabrico';
 import { DI_TYPES as CONSOLE_DI_TYPES } from './di-types';
 
-import { ILogger } from '../../core/logging/logger.interface';
 import { CliLogger } from '../logging/cli-logger';
 
 import { InitActions } from '../actions/init-actions';

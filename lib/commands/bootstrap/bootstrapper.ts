@@ -1,4 +1,4 @@
-import { IBootstrapper } from '../../core/bootstrap/bootstrapper.interface';
+import { IBootstrapper } from 'fabrico';
 import { Container } from 'inversify';
 import { InitCommand } from '../init';
 import { GenCommand } from '../gen';

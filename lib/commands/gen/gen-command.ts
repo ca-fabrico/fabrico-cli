@@ -1,22 +1,20 @@
 import { injectable } from 'inversify';
-import { SeedGenerator } from 'fabrico';
+import { ISeedGenerator } from 'fabrico';
 
 @injectable()
 export class GenCommand {
 
   public async generate(): Promise<void> {
-    const seed = require('seed-ca-netcore-microservices');
-    const gen = new seed.SeedGenerator(':)');
-    const x = gen.foo3();
-    console.log(gen.foo());
-    await Promise.resolve()
-      .then((res) => {
-          console.log(res); // never called
-          return Promise.resolve();
-      })
-      .catch((err) => {
-          console.log(err.message); // something bad happened
-      });
+    const seed = 'seed-ca-netcore-microservices';
+    const gen = new (require(seed)).SeedGenerator() as ISeedGenerator;
+    await gen.bootstrap(null);
+    await gen.initialize();
+    await gen.prompt();
+    await gen.preGeneration();
+    await gen.generate();
+    await gen.conflicts();
+    await gen.postGeneration();
+    await gen.cleanup();
   }
 
 }
