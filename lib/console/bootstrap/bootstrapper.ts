@@ -17,7 +17,7 @@ class Bootstrapper implements IBootstrapper {
 
   public onInit(container: Container): void {
     const system = new System(pJson.version);
-    container.bind<System>(CORE_DI_TYPES.System).toFactory(() => system);
+    container.bind<System>(CORE_DI_TYPES.System).toConstantValue(system);
     container.bind<ILogger>(CORE_DI_TYPES.Logger).to(CliLogger).inSingletonScope();
     container.bind<InitActions>(CONSOLE_DI_TYPES.InitActions).to(InitActions).inSingletonScope();
     container.bind<InitQuestions>(CONSOLE_DI_TYPES.InitQuestions).to(InitQuestions).inSingletonScope();
