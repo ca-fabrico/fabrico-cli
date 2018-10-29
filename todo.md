@@ -2,10 +2,11 @@
 
 ## Cross project
 
-- [ ] Review interfaces
-- [ ] Review interfaces
 - [ ] Integrate Mocking framework and start writing unit tests
-- [ ] Verify code coverage
+- [ ] Review Code Standards:
+  - [ ] Comments
+  - [ ] Interfaces must be async
+  - [ ] Code Coverage
 - [ ] Implement minification and devops practices
 
 ## Fabrico Cli
