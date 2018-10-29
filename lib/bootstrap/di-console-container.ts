@@ -1,5 +1,7 @@
-// modules
+// libs
 import { bootstrapper as coreBS, container } from 'fabrico';
+
+// modules
 import { bootstrapper as consoleBS } from './bootstrapper';
 
 // Bootstrapping DI configuration of components
