@@ -1,7 +1,8 @@
-// lib
+// libs
 import chalk from 'chalk';
 import { inject, injectable } from 'inversify';
 
+// modules
 import { DI_TYPES } from '../../commands/bootstrap/di-types';
 import { GenCommand } from '../../commands/gen';
 

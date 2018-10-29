@@ -2,7 +2,7 @@
 
 ## Cross project
 
-- [ ] Review code and add comments
+- [ ] Review interfaces
 - [ ] Integrate Mocking framework and start writing unit tests
 - [ ] Verify code coverage
 - [ ] Implement minification and devops practices

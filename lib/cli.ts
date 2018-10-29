@@ -5,7 +5,7 @@ import * as commander from 'commander';
 import * as inquirer from 'inquirer';
 import { System, DI_TYPES as CORE_DI_TYPES } from 'fabrico';
 
-// modules - console
+// modules
 import { container } from './console/bootstrap/di-console-container';
 import { DI_TYPES as CONSOLE_DI_TYPES } from './console/bootstrap/di-types';
 

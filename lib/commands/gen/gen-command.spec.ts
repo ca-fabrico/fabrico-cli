@@ -1,8 +1,11 @@
+// libs
 import * as chai from 'chai';
 import * as mocha from 'mocha';
+
+// modules
 import { DI_TYPES } from '../bootstrap/di-types';
-import { container } from '../../console/bootstrap/di-console-container';
 import { GenCommand } from './gen-command';
+import { container } from '../../console/bootstrap/di-console-container';
 
 const expect = chai.expect;
 

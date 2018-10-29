@@ -1,11 +1,11 @@
-// lib
+// libs
 import { injectable, inject } from 'inversify';
 import { configure, getLogger, Configuration, Logger, LogLevelFilterAppender, shutdown } from 'log4js';
 import * as path from 'path';
-
-// model
-import { DI_TYPES } from '../bootstrap/di-types';
 import * as fs from 'fs';
+
+// models
+import { DI_TYPES } from '../bootstrap/di-types';
 
 /*
 * Logs to fs and console.

@@ -1,4 +1,7 @@
+// libs
 import { IBootstrapper } from 'fabrico';
+
+// modules
 import { Container } from 'inversify';
 import { InitCommand } from '../init';
 import { GenCommand } from '../gen';
