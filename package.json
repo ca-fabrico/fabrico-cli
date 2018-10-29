@@ -37,6 +37,7 @@
     "start": "node ./dist/bin/index.js",
     "link": "cd dist && npm link",
     "unlink": "cd dist && npm unlink",
+    "wksetup": "cd ../fabrico-workspace && fabrico-code-workspace.cmd SETUP_BOX",
     "wkb": "cd ../fabrico-workspace && fabrico-code-workspace.cmd BUILD",
     "wktest": "cd ../fabrico-workspace && fabrico-code-workspace.cmd TEST",
     "gitpush": "cd ../fabrico-workspace && fabrico-code-workspace.cmd GIT_PUSH",
