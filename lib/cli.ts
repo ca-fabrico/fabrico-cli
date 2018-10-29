@@ -6,8 +6,7 @@ import * as inquirer from 'inquirer';
 import { System, DI_TYPES as CORE_DI_TYPES } from 'fabrico';
 
 // modules
-import { container } from './console/bootstrap/di-console-container';
-import { DI_TYPES as CONSOLE_DI_TYPES } from './console/bootstrap/di-types';
+import { container, DI_TYPES as CONSOLE_DI_TYPES } from './bootstrap';
 
 import { InitQuestions } from './console/questions/init-questions';
 import { InitActions } from './console/actions/init-actions';
@@ -88,14 +87,13 @@ commander
 .description('start the generation process')
 .option('-v, --verbose', 'verbose output')
 .option('-f, --force', 'force initialization')
-.option('-t, --target', 'target of the generation')
+.option('-t, --target <target>', 'target of the generation')
 .option('--working-path <path>', 'working path')
 .action((options) => {
   const optVerbose = options.verbose;
   const optForce = options.force;
   const optTarget = options.target;
   const optWorkingPath = options.workingPath;
-  console.log(options);
   genActions.generate()
     .then((res) => {
       console.log(chalk.yellow('Your project is now initialized \u{1F37A}\u{1F37A}\u{1F37A}'));

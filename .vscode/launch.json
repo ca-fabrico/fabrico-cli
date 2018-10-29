@@ -11,8 +11,8 @@
       "preLaunchTask": "workspace-build",
       "args": [
         "${workspaceRoot}/bin/index.ts",
-        "init",
-        "-vfd",
+        "gen",
+        "-vf",
         "--working-path=${workspaceRoot}\\tmp"
       ],
       "runtimeArgs": [

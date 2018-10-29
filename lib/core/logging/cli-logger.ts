@@ -4,9 +4,6 @@ import { configure, getLogger, Configuration, Logger, LogLevelFilterAppender, sh
 import * as path from 'path';
 import * as fs from 'fs';
 
-// models
-import { DI_TYPES } from '../bootstrap/di-types';
-
 /*
 * Logs to fs and console.
 */

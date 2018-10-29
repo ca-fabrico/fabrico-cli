@@ -1,8 +1,6 @@
 // libs
-import { injectable } from 'inversify';
-
-// modules
-import { ISeedLoader, ISeedGenerator } from 'fabrico';
+import { injectable, inject } from 'inversify';
+import { ISeedLoader, ISeedGenerator,  DI_TYPES as CORE_DI_TYPES } from 'fabrico';
 
 @injectable()
 export class GenCommand {
@@ -10,7 +8,7 @@ export class GenCommand {
   /**
    * Create a new instance of GenCommand.
    */
-  constructor(private seedLoader: ISeedLoader) {
+  constructor(@inject(CORE_DI_TYPES.SeedLoader) private seedLoader: ISeedLoader) {
   }
 
   /**
@@ -18,7 +16,7 @@ export class GenCommand {
    */
   public async generate(): Promise<void> {
     const seedName = 'seed-ca-netcore-microservices';
-    const gen = this.seedLoader.createSeedGenerator(seedName);
+    const gen = await this.seedLoader.createSeedGenerator(seedName);
     await gen.bootstrap(null);
     await gen.initialize();
     await gen.prompt();

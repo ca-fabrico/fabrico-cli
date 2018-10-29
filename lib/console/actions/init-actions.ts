@@ -4,8 +4,8 @@ import { inject, injectable } from 'inversify';
 import { System, DI_TYPES as CORE_DI_TYPES } from 'fabrico';
 
 // modules
-import { DI_TYPES } from '../../commands/bootstrap/di-types';
-import { InitCommand } from '../../commands/init/index';
+import { DI_TYPES } from '../../bootstrap/di-types';
+import { InitCommand } from '../commands/init/index';
 import { Metadata, Target } from 'fabrico';
 
 @injectable()
