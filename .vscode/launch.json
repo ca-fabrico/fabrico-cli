@@ -25,13 +25,11 @@
       "internalConsoleOptions": "openOnSessionStart"
     },
     {
+      "name": "Debug Test",
       "type": "node",
       "request": "launch",
-      "name": "Debug Test",
-      "cwd": "${workspaceRoot}",
       "preLaunchTask": "build-test",
       "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-      "protocol": "inspector",
       "args": [
         "-u",
         "tdd",
@@ -40,6 +38,8 @@
         "--colors",
         "${workspaceRoot}/dist/**/*.spec.js"
       ],
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector",
       "sourceMaps": true,
       "outFiles": ["${workspaceRoot}/dist/**/*.js"],
       "internalConsoleOptions": "openOnSessionStart"

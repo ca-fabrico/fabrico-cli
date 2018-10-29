@@ -15,7 +15,7 @@ describe('GenCommand should', () => {
   });
 
   it('initilize', async () => {
-    const generate = await sut.generate();
+    // const generate = await sut.generate();
   });
 
 });
