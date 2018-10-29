@@ -3,6 +3,7 @@ import './polyfills';
 import chalk from 'chalk';
 import * as commander from 'commander';
 import * as inquirer from 'inquirer';
+import { System, DI_TYPES as CORE_DI_TYPES } from 'fabrico';
 
 // modules - console
 import { container } from './console/bootstrap/di-console-container';
@@ -12,8 +13,7 @@ import { InitQuestions } from './console/questions/init-questions';
 import { InitActions } from './console/actions/init-actions';
 import { GenActions } from './console/actions/gen-actions';
 
-const pjson = require('../package.json');
-
+const system = container.get<System>(CORE_DI_TYPES.System);
 const initQuestions = container.get<InitQuestions>(CONSOLE_DI_TYPES.InitQuestions);
 const initActions = container.get<InitActions>(CONSOLE_DI_TYPES.InitActions);
 const genActions = container.get<GenActions>(CONSOLE_DI_TYPES.GenActions);
@@ -21,7 +21,7 @@ const genActions = container.get<GenActions>(CONSOLE_DI_TYPES.GenActions);
 let validCommand = true;
 
 commander
-  .version(pjson.version)
+  .version(system.version)
   .description('Fabrico is a tool compliant to the Fabrico Manifest for Enterprise Applications Development.\nThis manifest intends to outline a methodology for enterprise applications development based on enhanced Proof of Concepts and code generation.');
 
 commander
@@ -39,7 +39,7 @@ commander
     const questions = (optDefaults === true) ? [] : initQuestions.getAllInitializationQuestions();
     inquirer.prompt(questions)
     .then((answers) => {
-      initActions.initialize(optVerbose, optForce, optWorkingPath, pjson.version, answers)
+      initActions.initialize(optVerbose, optForce, optWorkingPath, system.version, answers)
         .then(() => {
           console.log(chalk.yellow('Your project is now initialized \u{1F37A}\u{1F37A}\u{1F37A}'));
         })
