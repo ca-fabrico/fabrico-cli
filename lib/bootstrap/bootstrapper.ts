@@ -5,9 +5,9 @@ import { IBootstrapper, ISystem, IPhysicalFileSystem, ILogger,  DI_TYPES as CORE
 // modules
 import { DI_TYPES } from './di-types';
 import { CliSystem } from '../core/system/cli-system';
-import { CliPhysicalFileSystem } from '../core/filesystem';
+import { CliPhysicalFileSystem } from '../core/filesystem/cli-physical-file-system';
 import { CliLogger } from '../core/logging/cli-logger';
-import { CliSeedLoader } from '../seed';
+import { CliSeedLoader } from '../seed/cli-seed-loader';
 
 import { InitCommand } from '../console/commands/init';
 import { GenCommand } from '../console/commands/gen';
