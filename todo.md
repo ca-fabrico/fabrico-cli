@@ -3,6 +3,7 @@
 ## Cross project
 
 - [ ] Configure the Jira project
+- [ ] Create a CliProject and remove node.js dependencies from the fabrico lib (require should be not allowed)
 - [ ] Create a CliProject and move the access to the node.js' libs
 - [ ] Integrate logging and take in account the verbose flag
 - [ ] Integrate Mocking framework and start writing unit tests
