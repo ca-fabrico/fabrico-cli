@@ -3,6 +3,7 @@
 ## Cross project
 
 - [ ] Configure the Jira project
+- [ ] Create a CliProject and move the access to the node.js' libs
 - [ ] Integrate logging and take in account the verbose flag
 - [ ] Integrate Mocking framework and start writing unit tests
 - [ ] Review Code Standards:
