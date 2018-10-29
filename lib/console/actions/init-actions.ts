@@ -18,10 +18,6 @@ export class InitActions {
     metaData.name = answers.name || 'fabrico-app';
     metaData.description = answers.description || 'This is a Fabrico app';
     metaData.author = answers.author || this.system.username;
-    const t1 = new Target();
-    t1.name = 'target 1';
-    t1.path = 'target_1';
-    metaData.targets = [ t1 ];
     await this.initCommand.initialize(verbose, force, workingPath, metaData);
   }
 

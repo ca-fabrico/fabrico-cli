@@ -1,27 +1,17 @@
-import { injectable } from 'inversify';
-import { Metadata } from 'fabrico';
-import * as fs from 'fs-extra';
-
-const yamlJs = require('js-yaml');
-const path = require('path');
+import { injectable, inject } from 'inversify';
+import { Metadata, DI_TYPES as CORE_DI_TYPES, Project } from 'fabrico';
 
 @injectable()
 export class InitCommand {
 
+  /**
+   * Create a new instance of InitCommand.
+   */
+  constructor(@inject(CORE_DI_TYPES.Project)  private project: Project) {
+  }
+
   public async initialize(verbose: boolean, force: boolean, workingPath: string, metaData: Metadata): Promise<void> {
-    const yaml = yamlJs.safeDump(metaData);
-    const filePath = path.join(workingPath, '.fabrico.yml');
-    const fileExist = await fs.pathExists(filePath);
-    if (fileExist) {
-      if (force) {
-        await fs.remove(filePath);
-      } else {
-        throw new Error(`File already exist (${filePath}).`);
-      }
-    } else {
-      await fs.createFile(filePath);
-    }
-    await fs.appendFile(filePath, yaml);
+    await this.project.saveMetaData(force, workingPath, metaData);
   }
 
 }
