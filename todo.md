@@ -2,6 +2,7 @@
 
 ## Cross project
 
+- [ ] Configure the Jira project
 - [ ] Integrate Mocking framework and start writing unit tests
 - [ ] Review Code Standards:
   - [ ] Comments
