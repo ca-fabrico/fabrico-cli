@@ -14,7 +14,7 @@ author: Code Architects
     - name: bff-api
       path: ./bff-api
       seed:
-        name: '@ca-foundation/microservices'
+        name: 'ca-netcore-microservices'
         version: ^3.2.5
         type: npm
         language: nodejs
