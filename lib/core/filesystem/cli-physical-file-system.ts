@@ -1,7 +1,7 @@
 // libs
-import { IFileSystem } from 'fabrico';
+import { PhysicalFileSystem } from 'fabrico';
 
-export class PhysicalFileSystem implements IFileSystem {
+export class CliPhysicalFileSystem extends PhysicalFileSystem {
 
   pathJoin(...path: string[]): Promise<string> {
     throw new Error('Method not implemented.');

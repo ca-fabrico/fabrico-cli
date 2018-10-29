@@ -1,13 +1,14 @@
 // libs
 import { Container } from 'inversify';
-import { System, IBootstrapper, ILogger,  DI_TYPES as CORE_DI_TYPES, ISeedLoader } from 'fabrico';
-
-// modules
-import { SeedLoader } from '../seed';
+import { IBootstrapper, ISystem, IPhysicalFileSystem, ILogger,  DI_TYPES as CORE_DI_TYPES, ISeedLoader } from 'fabrico';
 
 // modules
 import { DI_TYPES } from './di-types';
+import { CliSystem } from '../core/system/cli-system';
+import { CliPhysicalFileSystem } from '../core/filesystem';
 import { CliLogger } from '../core/logging/cli-logger';
+import { CliSeedLoader } from '../seed';
+
 import { InitCommand } from '../console/commands/init';
 import { GenCommand } from '../console/commands/gen';
 
@@ -17,11 +18,10 @@ import { InitQuestions } from '../console/questions';
 class Bootstrapper implements IBootstrapper {
 
   public onInit(container: Container): void {
-    const pJson = require('../../package.json');
-    const system = new System(pJson.version);
-    container.bind<System>(CORE_DI_TYPES.System).toConstantValue(system);
+    container.bind<ISystem>(CORE_DI_TYPES.System).to(CliSystem).inSingletonScope();
+    container.bind<IPhysicalFileSystem>(CORE_DI_TYPES.PhysicalFileSystem).to(CliPhysicalFileSystem).inSingletonScope();
     container.bind<ILogger>(CORE_DI_TYPES.Logger).to(CliLogger).inSingletonScope();
-    container.bind<ISeedLoader>(CORE_DI_TYPES.SeedLoader).to(SeedLoader).inSingletonScope();
+    container.bind<ISeedLoader>(CORE_DI_TYPES.SeedLoader).to(CliSeedLoader).inSingletonScope();
 
     container.bind<InitCommand>(DI_TYPES.InitCommand).to(InitCommand).inSingletonScope();
     container.bind<GenCommand>(DI_TYPES.GenCommand).to(GenCommand).inSingletonScope();

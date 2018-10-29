@@ -1,1 +1,1 @@
-export * from './physical-file-system';
+export * from './cli-physical-file-system';

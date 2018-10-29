@@ -1,1 +1,1 @@
-export * from './seed-loader';
+export * from './cli-seed-loader';
