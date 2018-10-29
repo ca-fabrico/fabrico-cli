@@ -3,6 +3,7 @@
 ## Cross project
 
 - [ ] Configure the Jira project
+- [ ] Integrate logging and tak in account the verbose flag
 - [ ] Integrate Mocking framework and start writing unit tests
 - [ ] Review Code Standards:
   - [ ] Comments
