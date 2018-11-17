@@ -21,13 +21,13 @@ describe('InitCommand should', () => {
   });
 
   it('initialize and save the metadata', async () => {
-    projectMock.setup(x => x.saveMetaData(false, '', null)).returns(() => Promise.resolve());
-    const verbose = true;
     const force = true;
+    projectMock.setup(x => x.saveMetaData('', null, force)).returns(() => Promise.resolve());
+    const verbose = true;
     const workingPath = '/c/tmp';
     const metaData = new Metadata();
-    await initCmd.initialize(verbose, force, workingPath, metaData);
-    projectMock.verify(x => x.saveMetaData(force, workingPath, metaData), TypeMoq.Times.once());
+    await initCmd.initialize(workingPath, metaData, force, verbose);
+    projectMock.verify(x => x.saveMetaData(workingPath, metaData, force), TypeMoq.Times.once());
   });
 
 });

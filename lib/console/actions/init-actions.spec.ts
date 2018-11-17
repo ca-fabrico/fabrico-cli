@@ -32,13 +32,13 @@ describe('InitActions should', () => {
     systemMock.setup(x => x.username).returns(() => username);
     const answers = { };
     // Null check
-    await initAct.initialize(verbose, force, workingPath, null, answers);
+    await initAct.initialize(workingPath, null, answers, force, verbose);
     const metadata1 = { version: vs, name: 'fabrico-app', description: 'This is a Fabrico app', author: username } as Metadata;
-    initCommandMock.verify(x => x.initialize(verbose, force, workingPath, TypeMoq.It.isObjectWith(metadata1)), TypeMoq.Times.once());
+    initCommandMock.verify(x => x.initialize(workingPath, TypeMoq.It.isObjectWith(metadata1), force, verbose), TypeMoq.Times.once());
     // Undefined check
-    await initAct.initialize(verbose, force, workingPath, undefined, answers);
+    await initAct.initialize(workingPath, undefined, answers, force, verbose);
     const metadata2 = { version: vs, name: 'fabrico-app', description: 'This is a Fabrico app', author: username } as Metadata;
-    initCommandMock.verify(x => x.initialize(verbose, force, workingPath, TypeMoq.It.isObjectWith(metadata2)), TypeMoq.Times.exactly(2));
+    initCommandMock.verify(x => x.initialize(workingPath, TypeMoq.It.isObjectWith(metadata2), force, verbose), TypeMoq.Times.exactly(2));
   });
 
   it('invoke the init command', async () => {
@@ -47,9 +47,9 @@ describe('InitActions should', () => {
     const workingPath = '/c/tmp';
     const vs = '2.5';
     const answers = { name: 'test-app', description: 'My test app.', author: 'Code Architects'};
-    await initAct.initialize(verbose, force, workingPath, vs, answers);
+    await initAct.initialize(workingPath, vs, answers, force, verbose);
     const metadata = { version: vs, name: answers.name, description: answers.description, author: answers.author } as Metadata;
-    initCommandMock.verify(x => x.initialize(verbose, force, workingPath, TypeMoq.It.isObjectWith(metadata)), TypeMoq.Times.once());
+    initCommandMock.verify(x => x.initialize(workingPath, TypeMoq.It.isObjectWith(metadata), force, verbose), TypeMoq.Times.once());
   });
 
 });

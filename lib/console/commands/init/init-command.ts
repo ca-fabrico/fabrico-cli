@@ -18,8 +18,8 @@ export class InitCommand {
    * @param workingPath working path
    * @param metaData metadata of the project
    */
-  public async initialize(verbose: boolean, force: boolean, workingPath: string, metaData: Metadata): Promise<void> {
-    await this.project.saveMetaData(force, workingPath, metaData);
+  public async initialize(workingPath: string, metaData: Metadata, force: boolean, verbose: boolean): Promise<void> {
+    await this.project.saveMetaData(workingPath, metaData, force);
   }
 
 }

@@ -38,7 +38,7 @@ commander
     const questions = (optDefaults === true) ? [] : initQuestions.getAllInitializationQuestions();
     inquirer.prompt(questions)
     .then((answers) => {
-      initActions.initialize(optVerbose, optForce, optWorkingPath, system.version, answers)
+      initActions.initialize(optWorkingPath, system.version, answers, optForce, optVerbose)
         .then(() => {
           console.log(chalk.yellow('Your project is now initialized \u{1F37A}\u{1F37A}\u{1F37A}'));
         })

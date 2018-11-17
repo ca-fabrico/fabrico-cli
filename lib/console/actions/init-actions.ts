@@ -13,13 +13,13 @@ export class InitActions {
 
   constructor(@inject(CORE_DI_TYPES.System) private system: System, @inject(DI_TYPES.InitCommand) private initCommand: InitCommand) { }
 
-  public async initialize(verbose: boolean, force: boolean, workingPath: string, version: string, answers: any): Promise<void> {
+  public async initialize(workingPath: string, version: string, answers: any, force: boolean, verbose: boolean): Promise<void> {
     const metaData = new Metadata();
     metaData.version = version || this.system.version;
     metaData.name = answers.name || 'fabrico-app';
     metaData.description = answers.description || 'This is a Fabrico app';
     metaData.author = answers.author || this.system.username;
-    await this.initCommand.initialize(verbose, force, workingPath, metaData);
+    await this.initCommand.initialize(workingPath, metaData, force, verbose);
   }
 
 }
