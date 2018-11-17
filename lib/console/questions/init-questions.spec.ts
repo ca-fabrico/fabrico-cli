@@ -16,7 +16,7 @@ describe('InitQuestions should', () => {
     initQuestions = new InitQuestions();
   });
 
-  it('initialize and save the metadata', async () => {
+  it('get questions', async () => {
     const q1 = initQuestions.getNameAndDescriptionQuestions();
     expect(q1).length(2, 'q1 length should be equal to 2');
     expect(q1[0].validate(null, null)).to.eq(true, 'q1[0] validation failed');
