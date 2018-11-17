@@ -1,30 +1,41 @@
 // libs
+import { injectable, inject } from 'inversify';
 import { PhysicalFileSystem } from 'fabrico';
-import * as fs from 'fs-extra';
+
+// modules
+import { DI_TYPES } from '../../bootstrap';
+import { NodeFs } from './node-fs';
 
 export class CliPhysicalFileSystem extends PhysicalFileSystem {
 
   private _yamlJs = require('js-yaml');
   private _path = require('path');
 
+  /**
+   * Create a new instance of InitCommand.
+   */
+  constructor(@inject(DI_TYPES.NodeFs) private nodeFs: NodeFs) {
+    super();
+  }
+
   pathJoin(...path: string[]): Promise<string> {
-    return this._path.join(path, '.fabrico.yml');
+    return this.nodeFs.pathJoin(path);
   }
 
   pathExists(path: string): Promise<boolean> {
-    return fs.pathExists(path);
+    return this.nodeFs.pathExists(path);
   }
 
   remove(path: string): Promise<void> {
-    return fs.remove(path);
+    return this.nodeFs.remove(path);
   }
 
   createFile(path: string, data: any, force: boolean): Promise<void> {
-    return fs.createFile(path);
+    return this.nodeFs.createFile(path, data, force);
   }
 
   appendFile(file: string | Buffer | number, data: any) {
-    return fs.appendFile(file, data);
+    return this.nodeFs.appendFile(file, data);
   }
 
   createYamlFile(path: string, data: any, force: boolean): Promise<void> {
