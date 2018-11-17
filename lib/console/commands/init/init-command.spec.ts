@@ -1,26 +1,33 @@
 // libs
 import * as chai from 'chai';
 import * as mocha from 'mocha';
+import * as TypeMoq from 'typemoq';
 
 // modules
-import { DI_TYPES } from '../../../bootstrap/di-types';
-import { container } from '../../../bootstrap/di-console-container';
 import { InitCommand } from './init-command';
+import { IProject, Metadata } from 'fabrico';
 
 const expect = chai.expect;
 
 describe('InitCommand should', () => {
 
-  let sut: InitCommand;
+  const projectMock: TypeMoq.IMock<IProject> = TypeMoq.Mock.ofType<IProject>();
+  let initCmd: InitCommand;
 
   beforeEach(() => {
-    sut = container.get<InitCommand>(DI_TYPES.InitCommand);
+    // Mock object must be thenable https://github.com/florinn/typemoq/issues/66
+    projectMock.setup((x: any) => x.then).returns(() => undefined);
+    initCmd = new InitCommand(projectMock.object);
   });
 
-  it('initilize', async () => {
-    // const initilize = await sut.initialize(false, false, '', null);
-    // expect(initilize).to.exist;
-    // expect(initilize).to.have.property('name').to.equal('ca-repo');
+  it('initialize and save the metadata', async () => {
+    projectMock.setup(x => x.saveMetaData(false, '', null)).returns(() => Promise.resolve());
+    const verbose = true;
+    const force = true;
+    const workingPath = '/c/tmp';
+    const metaData = new Metadata();
+    await initCmd.initialize(verbose, force, workingPath, metaData);
+    projectMock.verify(x => x.saveMetaData(force, workingPath, metaData), TypeMoq.Times.once());
   });
 
 });

@@ -1,24 +1,37 @@
 // libs
 import * as chai from 'chai';
 import * as mocha from 'mocha';
+import * as TypeMoq from 'typemoq';
 
 // modules
-import { DI_TYPES } from '../../../bootstrap/di-types';
-import { container } from '../../../bootstrap/di-console-container';
 import { GenCommand } from './gen-command';
+import { ISeedLoader, ISeedGenerator } from 'fabrico';
 
 const expect = chai.expect;
 
 describe('GenCommand should', () => {
 
-  let sut: GenCommand;
+  const seedLoaderMock: TypeMoq.IMock<ISeedLoader> = TypeMoq.Mock.ofType<ISeedLoader>();
+  const seedGenMock: TypeMoq.IMock<ISeedGenerator> = TypeMoq.Mock.ofType<ISeedGenerator>();
+  let genCmd: GenCommand;
 
   beforeEach(() => {
-    sut = container.get<GenCommand>(DI_TYPES.InitCommand);
+    // Mock object must be thenable https://github.com/florinn/typemoq/issues/66
+    seedGenMock.setup((x: any) => x.then).returns(() => undefined);
+    genCmd = new GenCommand(seedLoaderMock.object);
   });
 
-  it('initilize', async () => {
-    // const generate = await sut.generate();
+  it('run the generation loop', async () => {
+    seedLoaderMock.setup(x => x.createSeedGenerator(TypeMoq.It.isAnyString())).returns(() => Promise.resolve<ISeedGenerator>(seedGenMock.object));
+    await genCmd.generate();
+    seedGenMock.verify(x => x.bootstrap(TypeMoq.It.isAny()), TypeMoq.Times.once());
+    seedGenMock.verify(x => x.initialize(), TypeMoq.Times.once());
+    seedGenMock.verify(x => x.prompt(), TypeMoq.Times.once());
+    seedGenMock.verify(x => x.preGeneration(), TypeMoq.Times.once());
+    seedGenMock.verify(x => x.generate(), TypeMoq.Times.once());
+    seedGenMock.verify(x => x.conflicts(), TypeMoq.Times.once());
+    seedGenMock.verify(x => x.postGeneration(), TypeMoq.Times.once());
+    seedGenMock.verify(x => x.cleanup(), TypeMoq.Times.once());
   });
 
 });
