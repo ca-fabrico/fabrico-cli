@@ -6,7 +6,7 @@ import { IBootstrapper, ISystem, IPhysicalFileSystem, ILogger, ISeedLoader, IPro
 import { DI_TYPES } from './di-types';
 
 import { CliSystem } from '../core/system/cli-system';
-import { NodeFs } from '../core/filesystem/node-fs';
+import { FsExtra } from '../core/filesystem/fs-extra';
 import { CliPhysicalFileSystem } from '../core/filesystem/cli-physical-file-system';
 import { CliLogger } from '../core/logging/cli-logger';
 
@@ -24,7 +24,7 @@ class Bootstrapper implements IBootstrapper {
   public onInit(container: Container): void {
     // Core
     container.bind<ISystem>(CORE_DI_TYPES.System).to(CliSystem).inSingletonScope();
-    container.bind<NodeFs>(DI_TYPES.NodeFs).to(NodeFs).inSingletonScope();
+    container.bind<FsExtra>(DI_TYPES.FsExtra).to(FsExtra).inSingletonScope();
     container.bind<IPhysicalFileSystem>(CORE_DI_TYPES.PhysicalFileSystem).to(CliPhysicalFileSystem).inSingletonScope();
     container.bind<ILogger>(CORE_DI_TYPES.Logger).to(CliLogger).inSingletonScope();
 

@@ -1,7 +1,7 @@
 // libs
 import * as fs from 'fs-extra';
 
-export class NodeFs {
+export class FsExtra {
 
   private _yamlJs = require('js-yaml');
   private _path = require('path');

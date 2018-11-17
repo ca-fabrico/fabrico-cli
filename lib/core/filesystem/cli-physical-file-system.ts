@@ -4,7 +4,7 @@ import { PhysicalFileSystem } from 'fabrico';
 
 // modules
 import { DI_TYPES } from '../../bootstrap';
-import { NodeFs } from './node-fs';
+import { FsExtra } from './fs-extra';
 
 export class CliPhysicalFileSystem extends PhysicalFileSystem {
 
@@ -14,32 +14,32 @@ export class CliPhysicalFileSystem extends PhysicalFileSystem {
   /**
    * Create a new instance of InitCommand.
    */
-  constructor(@inject(DI_TYPES.NodeFs) private nodeFs: NodeFs) {
+  constructor(@inject(DI_TYPES.FsExtra) private fsExtra: FsExtra) {
     super();
   }
 
   pathJoin(...path: string[]): Promise<string> {
-    return this.nodeFs.pathJoin(path);
+    return this.fsExtra.pathJoin(...path);
   }
 
   pathExists(path: string): Promise<boolean> {
-    return this.nodeFs.pathExists(path);
+    return this.fsExtra.pathExists(path);
   }
 
   remove(path: string): Promise<void> {
-    return this.nodeFs.remove(path);
+    return this.fsExtra.remove(path);
   }
 
   createFile(path: string, data: any, force: boolean): Promise<void> {
-    return this.nodeFs.createFile(path, data, force);
+    return this.fsExtra.createFile(path, data, force);
   }
 
   appendFile(file: string | Buffer | number, data: any) {
-    return this.nodeFs.appendFile(file, data);
+    return this.fsExtra.appendFile(file, data);
   }
 
   createYamlFile(path: string, data: any, force: boolean): Promise<void> {
-    return new Promise(async () => {
+   return new Promise(async (resolve) => {
       const yaml = this._yamlJs.safeDump(data);
       const filePath = await this.pathJoin(path, '.fabrico.yml');
       const fileExist = await this.pathExists(filePath);
@@ -53,6 +53,7 @@ export class CliPhysicalFileSystem extends PhysicalFileSystem {
         await this.createFile(filePath, null, false);
       }
       await this.appendFile(filePath, yaml);
+      resolve();
     });
   }
 
