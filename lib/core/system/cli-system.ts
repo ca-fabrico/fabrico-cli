@@ -1,4 +1,4 @@
-// Libs
+// libs
 import { System } from 'fabrico';
 import os = require('os');
 
