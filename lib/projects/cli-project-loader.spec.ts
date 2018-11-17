@@ -20,7 +20,7 @@ describe('CliProject should', () => {
     cliProj = new CliProject(physicalFileSystemMock.object);
   });
 
-  it('invoke the generate command', async () => {
+  it('save the metadata', async () => {
     const workingPath = '/c/tmp';
     const metadata = { version: '1.0.0' } as Metadata;
     const force = true;
