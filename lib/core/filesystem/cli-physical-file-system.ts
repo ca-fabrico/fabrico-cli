@@ -20,7 +20,11 @@ export class CliPhysicalFileSystem extends PhysicalFileSystem {
   }
 
   createFile(path: string, data: any, force: boolean): Promise<void> {
-    throw new Error('Method not implemented.');
+    return fs.createFile(path);
+  }
+
+  appendFile(file: string | Buffer | number, data: any) {
+    return fs.appendFile(file, data);
   }
 
   createYamlFile(path: string, data: any, force: boolean): Promise<void> {
@@ -35,9 +39,9 @@ export class CliPhysicalFileSystem extends PhysicalFileSystem {
           throw new Error(`File already exist (${filePath}).`);
         }
       } else {
-        await fs.createFile(filePath);
+        await this.createFile(filePath, null, false);
       }
-      await fs.appendFile(filePath, yaml);
+      await this.appendFile(filePath, yaml);
     });
   }
 
