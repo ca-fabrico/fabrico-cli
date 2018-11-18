@@ -46,7 +46,7 @@ export class CliPhysicalFileSystem extends PhysicalFileSystem {
   }
 
   createYamlFile(path: string, data: any, force: boolean): Promise<void> {
-   return new Promise(async (resolve) => {
+   return new Promise(async (resolve, reject) => {
       const yaml = this._yamlJs.safeDump(data);
       const filePath = await this.pathJoin(path, '.fabrico.yml');
       const fileExist = await this.pathExists(filePath);
@@ -54,12 +54,11 @@ export class CliPhysicalFileSystem extends PhysicalFileSystem {
         if (force) {
           await this.remove(filePath);
         } else {
-          throw new Error(`File already exist (${filePath}).`);
+          reject(new Error(`File already exist (${filePath}).`));
+          return;
         }
-      } else {
-        await this.createFile(filePath, null, false);
       }
-      await this.appendFile(filePath, yaml);
+      await this.createFile(filePath, yaml, false);
       resolve();
     });
   }

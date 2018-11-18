@@ -11,7 +11,6 @@ import { injectable } from 'inversify';
 @injectable()
 export class FsExtra {
 
-  private _yamlJs = require('js-yaml');
   private _path = require('path');
 
   pathJoin(...path: string[]): Promise<string> {
