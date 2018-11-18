@@ -1,17 +1,27 @@
+/*
+ * Copyright (c) 2018 Code Architects
+ *
+ * Created by Code Architects <info@codearchitects.com> on 2018-11-17.
+ */
+
 // libs
 import * as chai from 'chai';
 import * as mocha from 'mocha';
 import * as TypeMoq from 'typemoq';
 
 // modules
-import { CliPhysicalFileSystem } from './cli-physical-file-system';
-import { FsExtra } from './fs-extra';
+import {
+  CliPhysicalFileSystem
+} from './cli-physical-file-system';
+import {
+  FsExtra
+} from './fs-extra';
 
 const expect = chai.expect;
 
 describe('CliPhysicalFileSystem should', () => {
 
-  const fsExtraMock: TypeMoq.IMock<FsExtra> = TypeMoq.Mock.ofType<FsExtra>();
+  const fsExtraMock: TypeMoq.IMock < FsExtra > = TypeMoq.Mock.ofType < FsExtra > ();
   let cliPFs: CliPhysicalFileSystem;
 
   beforeEach(() => {
@@ -22,7 +32,10 @@ describe('CliPhysicalFileSystem should', () => {
 
   it('create a yaml file', async () => {
     const path = '';
-    const data = { key: '001', value: 'ABC'};
+    const data = {
+      key: '001',
+      value: 'ABC'
+    };
     const force = true;
     await cliPFs.createYamlFile(path, data, force);
   });

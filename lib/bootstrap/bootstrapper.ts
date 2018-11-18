@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2018 Code Architects
+ *
+ * Created by Code Architects <info@codearchitects.com> on 2018-10-20.
+ */
+
 // libs
 import { Container } from 'inversify';
 import { IBootstrapper, ISystem, IPhysicalFileSystem, ILogger, ISeedLoader, IProject,  DI_TYPES as CORE_DI_TYPES } from 'fabrico';
@@ -17,6 +23,7 @@ import { CliProject } from '../projects/cli-project-loader';
 import { InitActions, GenActions } from '../console/actions';
 import { InitQuestions } from '../console/questions';
 import { InitCommand } from '../console/commands/init';
+
 import { GenCommand } from '../console/commands/gen';
 
 class Bootstrapper implements IBootstrapper {
