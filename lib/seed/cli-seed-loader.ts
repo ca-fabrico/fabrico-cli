@@ -6,14 +6,14 @@
 
 // libs
 import { injectable } from 'inversify';
-import { SeedLoader, ISeedGenerator } from 'fabrico';
+import { ISeedDescriptor, SeedLoader, ISeedGenerator } from 'fabrico';
 
 @injectable()
 export class CliSeedLoader extends SeedLoader {
 
-  public async loadSeed(seedName: string): Promise<any> {
+  public async loadSeed(seedName: string): Promise<ISeedDescriptor> {
     const seed = await require(seedName);
-    return seed;
+    return seed.default;
   }
 
 }

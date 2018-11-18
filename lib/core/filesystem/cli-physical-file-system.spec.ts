@@ -10,26 +10,18 @@ import * as mocha from 'mocha';
 import * as TypeMoq from 'typemoq';
 
 // modules
-import {
-  CliPhysicalFileSystem
-} from './cli-physical-file-system';
-import {
-  FsExtra
-} from './fs-extra';
-import { once } from 'cluster';
+import { CliPhysicalFileSystem } from './cli-physical-file-system';
 
 const expect = chai.expect;
 
 describe('CliPhysicalFileSystem should', () => {
 
-  const fsExtraMock: TypeMoq.IMock < FsExtra > = TypeMoq.Mock.ofType <FsExtra> ();
-  let cliPFs: CliPhysicalFileSystem;
+  let cliPFsMock: TypeMoq.IMock<CliPhysicalFileSystem>;
 
   beforeEach(() => {
-    fsExtraMock.reset();
-    // Mock object must be thenable https://github.com/florinn/typemoq/issues/66
-    fsExtraMock.setup((x: any) => x.then).returns(() => undefined);
-    cliPFs = new CliPhysicalFileSystem(fsExtraMock.object);
+    const cliPhysicalFileSystem = new CliPhysicalFileSystem();
+    cliPFsMock = TypeMoq.Mock.ofInstance<CliPhysicalFileSystem>(cliPhysicalFileSystem);
+    cliPFsMock.callBase = true;
   });
 
   it('create a yaml file (force = true)', async () => {
@@ -41,11 +33,11 @@ describe('CliPhysicalFileSystem should', () => {
     };
     const yaml = `key: '001'\nvalue: ABC\n`;
     const force = true;
-    fsExtraMock.setup(x => x.pathJoin(path, TypeMoq.It.isAnyString())).returns(() => Promise.resolve(filePath));
-    fsExtraMock.setup(x => x.pathExists(filePath)).returns(() => Promise.resolve(false));
-    await cliPFs.createYamlFile(path, data, force);
-    fsExtraMock.verify(x => x.pathJoin(path, TypeMoq.It.isAnyString()), TypeMoq.Times.once());
-    fsExtraMock.verify(x => x.createFile(filePath, yaml, false), TypeMoq.Times.once());
+    cliPFsMock.setup(x => x.pathJoin(path, TypeMoq.It.isAnyString())).returns(() => Promise.resolve(filePath));
+    cliPFsMock.setup(x => x.pathExists(filePath)).returns(() => Promise.resolve(false));
+    await cliPFsMock.object.createYamlFile(path, data, force);
+    cliPFsMock.verify(x => x.pathJoin(path, TypeMoq.It.isAnyString()), TypeMoq.Times.once());
+    cliPFsMock.verify(x => x.createFile(filePath, yaml, false), TypeMoq.Times.once());
   });
 
   it('override a yaml file (force = true)', async () => {
@@ -57,13 +49,13 @@ describe('CliPhysicalFileSystem should', () => {
     };
     const yaml = `key: '001'\nvalue: ABC\n`;
     const force = true;
-    fsExtraMock.setup(x => x.pathJoin(path, TypeMoq.It.isAnyString())).returns(() => Promise.resolve(filePath));
-    fsExtraMock.setup(x => x.pathExists(filePath)).returns(() => Promise.resolve(true));
-    await cliPFs.createYamlFile(path, data, force);
-    fsExtraMock.verify(x => x.pathJoin(path, TypeMoq.It.isAnyString()), TypeMoq.Times.once());
-    fsExtraMock.verify(x => x.pathExists(filePath), TypeMoq.Times.once());
-    fsExtraMock.verify(x => x.remove(filePath), TypeMoq.Times.once());
-    fsExtraMock.verify(x => x.createFile(filePath, yaml, false), TypeMoq.Times.once());
+    cliPFsMock.setup(x => x.pathJoin(path, TypeMoq.It.isAnyString())).returns(() => Promise.resolve(filePath));
+    cliPFsMock.setup(x => x.pathExists(filePath)).returns(() => Promise.resolve(true));
+    await cliPFsMock.object.createYamlFile(path, data, force);
+    cliPFsMock.verify(x => x.pathJoin(path, TypeMoq.It.isAnyString()), TypeMoq.Times.once());
+    cliPFsMock.verify(x => x.pathExists(filePath), TypeMoq.Times.once());
+    cliPFsMock.verify(x => x.remove(filePath), TypeMoq.Times.once());
+    cliPFsMock.verify(x => x.createFile(filePath, yaml, false), TypeMoq.Times.once());
   });
 
   it('override a yaml file (force = false)', async () => {
@@ -75,16 +67,16 @@ describe('CliPhysicalFileSystem should', () => {
     };
     const yaml = `key: '001'\nvalue: ABC\n`;
     const force = false;
-    fsExtraMock.setup(x => x.pathJoin(path, TypeMoq.It.isAnyString())).returns(() => Promise.resolve(filePath));
-    fsExtraMock.setup(x => x.pathExists(filePath)).returns(() => Promise.resolve(true));
+    cliPFsMock.setup(x => x.pathJoin(path, TypeMoq.It.isAnyString())).returns(() => Promise.resolve(filePath));
+    cliPFsMock.setup(x => x.pathExists(filePath)).returns(() => Promise.resolve(true));
     try {
-      await cliPFs.createYamlFile(path, data, force)
+      await cliPFsMock.object.createYamlFile(path, data, force);
       expect(true).eq(false, 'An exception was not thrown');
     } catch (e) {
       expect(e.message).eq('File already exist (/c/tmp/.fabrico.yml).');
     }
-    fsExtraMock.verify(x => x.pathJoin(path, TypeMoq.It.isAnyString()), TypeMoq.Times.once());
-    fsExtraMock.verify(x => x.pathExists(filePath), TypeMoq.Times.once());
+    cliPFsMock.verify(x => x.pathJoin(path, TypeMoq.It.isAnyString()), TypeMoq.Times.once());
+    cliPFsMock.verify(x => x.pathExists(filePath), TypeMoq.Times.once());
   });
 
 });

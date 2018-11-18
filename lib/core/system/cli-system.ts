@@ -6,8 +6,10 @@
 
 // libs
 import { ISystem } from 'fabrico';
+import { injectable } from 'inversify';
 import os = require('os');
 
+@injectable()
 export class CliSystem implements ISystem {
 
   get version(): string {

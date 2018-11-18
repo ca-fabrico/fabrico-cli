@@ -6,11 +6,11 @@
 
 // libs
 import { injectable, inject } from 'inversify';
+import * as fs from 'fs-extra';
 import { IPhysicalFileSystem } from 'fabrico';
 
 // modules
 import { DI_TYPES } from '../../bootstrap';
-import { FsExtra } from './fs-extra';
 
 @injectable()
 export class CliPhysicalFileSystem implements IPhysicalFileSystem {
@@ -18,30 +18,24 @@ export class CliPhysicalFileSystem implements IPhysicalFileSystem {
   private _yamlJs = require('js-yaml');
   private _path = require('path');
 
-  /**
-   * Create a new instance of InitCommand.
-   */
-  constructor(@inject(DI_TYPES.FsExtra) private fsExtra: FsExtra) {
-  }
-
   pathJoin(...path: string[]): Promise<string> {
-    return this.fsExtra.pathJoin(...path);
+    return this._path.join(path);
   }
 
   pathExists(path: string): Promise<boolean> {
-    return this.fsExtra.pathExists(path);
+    return fs.pathExists(path);
   }
 
   remove(path: string): Promise<void> {
-    return this.fsExtra.remove(path);
+    return fs.remove(path);
   }
 
-  createFile(path: string, data: any, force: boolean): Promise<void> {
-    return this.fsExtra.createFile(path, data, force);
+  createFile(filePath: string, data: any, force: boolean): Promise<void> {
+    return fs.createFile(filePath);
   }
 
-  appendFile(file: string | Buffer | number, data: any) {
-    return this.fsExtra.appendFile(file, data);
+  appendFile(filePath: string | Buffer | number, data: any) {
+    return fs.appendFile(filePath, data);
   }
 
   createYamlFile(path: string, data: any, force: boolean): Promise<void> {
