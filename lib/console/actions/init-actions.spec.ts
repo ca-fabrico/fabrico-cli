@@ -8,11 +8,11 @@
 import * as chai from 'chai';
 import * as mocha from 'mocha';
 import * as TypeMoq from 'typemoq';
+import { ISystem, Metadata } from 'fabrico';
 
 // modules
 import { InitActions } from './init-actions';
 import { InitCommand } from '../commands/init';
-import { ISystem, Metadata } from 'fabrico';
 
 const expect = chai.expect;
 

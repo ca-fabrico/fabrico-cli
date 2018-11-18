@@ -7,12 +7,11 @@
 // libs
 import chalk from 'chalk';
 import { inject, injectable } from 'inversify';
-import { ISystem, DI_TYPES as CORE_DI_TYPES } from 'fabrico';
+import { ISystem, Metadata, DI_TYPES as CORE_DI_TYPES } from 'fabrico';
 
 // modules
 import { DI_TYPES } from '../../bootstrap/di-types';
 import { InitCommand } from '../commands/init/index';
-import { Metadata, Target } from 'fabrico';
 
 @injectable()
 export class InitActions {
