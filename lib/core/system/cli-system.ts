@@ -5,10 +5,10 @@
  */
 
 // libs
-import { System } from 'fabrico';
+import { ISystem } from 'fabrico';
 import os = require('os');
 
-export class CliSystem extends System {
+export class CliSystem implements ISystem {
 
   get version(): string {
     const pJson = require('../../../package.json');

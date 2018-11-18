@@ -9,7 +9,7 @@ import './polyfills';
 import chalk from 'chalk';
 import * as commander from 'commander';
 import * as inquirer from 'inquirer';
-import { System, DI_TYPES as CORE_DI_TYPES } from 'fabrico';
+import { ISystem, DI_TYPES as CORE_DI_TYPES } from 'fabrico';
 
 // modules
 import { container, DI_TYPES as CONSOLE_DI_TYPES } from './bootstrap';
@@ -18,7 +18,7 @@ import { InitQuestions } from './console/questions/init-questions';
 import { InitActions } from './console/actions/init-actions';
 import { GenActions } from './console/actions/gen-actions';
 
-const system = container.get<System>(CORE_DI_TYPES.System);
+const system = container.get<ISystem>(CORE_DI_TYPES.System);
 const initQuestions = container.get<InitQuestions>(CONSOLE_DI_TYPES.InitQuestions);
 const initActions = container.get<InitActions>(CONSOLE_DI_TYPES.InitActions);
 const genActions = container.get<GenActions>(CONSOLE_DI_TYPES.GenActions);

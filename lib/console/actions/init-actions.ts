@@ -7,7 +7,7 @@
 // libs
 import chalk from 'chalk';
 import { inject, injectable } from 'inversify';
-import { System, DI_TYPES as CORE_DI_TYPES } from 'fabrico';
+import { ISystem, DI_TYPES as CORE_DI_TYPES } from 'fabrico';
 
 // modules
 import { DI_TYPES } from '../../bootstrap/di-types';
@@ -17,7 +17,7 @@ import { Metadata, Target } from 'fabrico';
 @injectable()
 export class InitActions {
 
-  constructor(@inject(CORE_DI_TYPES.System) private system: System, @inject(DI_TYPES.InitCommand) private initCommand: InitCommand) { }
+  constructor(@inject(CORE_DI_TYPES.System) private system: ISystem, @inject(DI_TYPES.InitCommand) private initCommand: InitCommand) { }
 
   public async initialize(workingPath: string, version: string, answers: any, force: boolean, verbose: boolean): Promise<void> {
     const metaData = new Metadata();
