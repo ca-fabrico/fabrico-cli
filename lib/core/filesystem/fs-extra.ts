@@ -1,6 +1,8 @@
 // libs
 import * as fs from 'fs-extra';
+import { injectable } from 'inversify';
 
+@injectable()
 export class FsExtra {
 
   private _yamlJs = require('js-yaml');

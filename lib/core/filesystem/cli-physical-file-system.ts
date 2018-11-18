@@ -6,6 +6,7 @@ import { PhysicalFileSystem } from 'fabrico';
 import { DI_TYPES } from '../../bootstrap';
 import { FsExtra } from './fs-extra';
 
+@injectable()
 export class CliPhysicalFileSystem extends PhysicalFileSystem {
 
   private _yamlJs = require('js-yaml');
