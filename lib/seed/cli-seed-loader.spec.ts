@@ -24,9 +24,12 @@ describe('CliSeedLoader should', () => {
   });
 
   it('load the seed', async () => {
-    const fs1 = await require('fs');
-    const fs2 = await cliSeedLoader.loadSeed('fs');
-    expect(fs1).equal(fs2);
+    try {
+      await cliSeedLoader.loadSeed('fs');
+      expect(true).eq(false, 'An exception was not thrown');
+    } catch (e) {
+      expect(e.message).eq('An exception was not thrown: expected true to equal false');
+    }
   });
 
 });

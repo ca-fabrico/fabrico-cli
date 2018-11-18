@@ -6,7 +6,7 @@
 
 // libs
 import { Container } from 'inversify';
-import { IBootstrapper, ISystem, IPhysicalFileSystem, ILogger, ISeedLoader, IProject,  DI_TYPES as CORE_DI_TYPES } from 'fabrico';
+import { IRuntime, Runtime, IBootstrapper, ISystem, IPhysicalFileSystem, ILogger, ISeedLoader, IProject,  DI_TYPES as CORE_DI_TYPES } from 'fabrico';
 
 // modules
 import { DI_TYPES } from './di-types';
@@ -29,6 +29,7 @@ class Bootstrapper implements IBootstrapper {
 
   public onInit(container: Container): void {
     // Core
+    container.bind<IRuntime>(CORE_DI_TYPES.Runtime).toConstantValue(new Runtime(container));
     container.bind<ISystem>(CORE_DI_TYPES.System).to(CliSystem).inSingletonScope();
     container.bind<IPhysicalFileSystem>(CORE_DI_TYPES.PhysicalFileSystem).to(CliPhysicalFileSystem).inSingletonScope();
     container.bind<ILogger>(CORE_DI_TYPES.Logger).to(CliLogger).inSingletonScope();
