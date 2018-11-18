@@ -11,7 +11,7 @@ import { ISeedDescriptor, SeedLoader, ISeedGenerator } from 'fabrico';
 @injectable()
 export class CliSeedLoader extends SeedLoader {
 
-  public async onLoadSeed(seedName: string): Promise<ISeedDescriptor> {
+  protected async onLoadSeed(seedName: string): Promise<ISeedDescriptor> {
     const seed = await require(seedName);
     const seedDescriptor = seed.default as ISeedDescriptor;
     return seedDescriptor;
