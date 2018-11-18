@@ -8,6 +8,7 @@
 import * as chai from 'chai';
 import * as mocha from 'mocha';
 import * as TypeMoq from 'typemoq';
+import { IRuntime } from 'fabrico';
 
 // modules
 import { CliSeedLoader } from './cli-seed-loader';
@@ -17,19 +18,14 @@ const expect = chai.expect;
 
 describe('CliSeedLoader should', () => {
 
+  const runtimeMock: TypeMoq.IMock<IRuntime> = TypeMoq.Mock.ofType<IRuntime>();
   let cliSeedLoader: CliSeedLoader;
 
   beforeEach(() => {
-    cliSeedLoader = new CliSeedLoader();
+    cliSeedLoader = new CliSeedLoader(runtimeMock.object);
   });
 
   it('load the seed', async () => {
-    try {
-      await cliSeedLoader.loadSeed('fs');
-      expect(true).eq(false, 'An exception was not thrown');
-    } catch (e) {
-      expect(e.message).eq('An exception was not thrown: expected true to equal false');
-    }
   });
 
 });

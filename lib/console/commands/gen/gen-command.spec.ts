@@ -8,10 +8,10 @@
 import * as chai from 'chai';
 import * as mocha from 'mocha';
 import * as TypeMoq from 'typemoq';
+import { ISeedLoader, ISeedGenerator } from 'fabrico';
 
 // modules
 import { GenCommand } from './gen-command';
-import { ISeedLoader, ISeedGenerator } from 'fabrico';
 
 const expect = chai.expect;
 

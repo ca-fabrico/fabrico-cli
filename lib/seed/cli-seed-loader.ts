@@ -13,7 +13,9 @@ export class CliSeedLoader extends SeedLoader {
 
   public async loadSeed(seedName: string): Promise<ISeedDescriptor> {
     const seed = await require(seedName);
-    return seed.default;
+    const seedDescriptor = seed.default as ISeedDescriptor;
+    super.boostrap(seedDescriptor);
+    return seedDescriptor;
   }
 
 }
