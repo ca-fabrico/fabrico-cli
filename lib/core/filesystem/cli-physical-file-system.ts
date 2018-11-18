@@ -6,14 +6,14 @@
 
 // libs
 import { injectable, inject } from 'inversify';
-import { PhysicalFileSystem } from 'fabrico';
+import { IPhysicalFileSystem } from 'fabrico';
 
 // modules
 import { DI_TYPES } from '../../bootstrap';
 import { FsExtra } from './fs-extra';
 
 @injectable()
-export class CliPhysicalFileSystem extends PhysicalFileSystem {
+export class CliPhysicalFileSystem implements IPhysicalFileSystem {
 
   private _yamlJs = require('js-yaml');
   private _path = require('path');
@@ -22,7 +22,6 @@ export class CliPhysicalFileSystem extends PhysicalFileSystem {
    * Create a new instance of InitCommand.
    */
   constructor(@inject(DI_TYPES.FsExtra) private fsExtra: FsExtra) {
-    super();
   }
 
   pathJoin(...path: string[]): Promise<string> {

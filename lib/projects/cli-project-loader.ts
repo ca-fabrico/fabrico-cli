@@ -6,7 +6,7 @@
 
 // libs
 import { injectable, inject } from 'inversify';
-import { Project, Metadata, PhysicalFileSystem, DI_TYPES as CORE_DI_TYPES } from 'fabrico';
+import { Project, Metadata, IPhysicalFileSystem, DI_TYPES as CORE_DI_TYPES } from 'fabrico';
 
 @injectable()
 export class CliProject extends Project {
@@ -14,7 +14,7 @@ export class CliProject extends Project {
   /**
    * Create a new instance of CliProject.
    */
-  constructor(@inject(CORE_DI_TYPES.PhysicalFileSystem) private physicalFileSystem: PhysicalFileSystem) {
+  constructor(@inject(CORE_DI_TYPES.PhysicalFileSystem) private physicalFileSystem: IPhysicalFileSystem) {
     super();
   }
 
