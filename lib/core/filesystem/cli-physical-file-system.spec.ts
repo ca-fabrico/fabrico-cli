@@ -26,33 +26,29 @@ describe('CliPhysicalFileSystem should', () => {
 
   it('create a yaml file (force = true)', async () => {
     const filePath = '/c/tmp/.fabrico.yml';
-    const path = '/c/tmp';
     const data = {
       key: '001',
       value: 'ABC'
     };
     const yaml = `key: '001'\nvalue: ABC\n`;
     const force = true;
-    cliPFsMock.setup(x => x.pathJoin(path, TypeMoq.It.isAnyString())).returns(() => Promise.resolve(filePath));
     cliPFsMock.setup(x => x.pathExists(filePath)).returns(() => Promise.resolve(false));
-    await cliPFsMock.object.createYamlFile(path, data, force);
-    cliPFsMock.verify(x => x.pathJoin(path, TypeMoq.It.isAnyString()), TypeMoq.Times.once());
+    cliPFsMock.setup(x => x.createFile(filePath, yaml, false)).returns(() => Promise.resolve());
+    await cliPFsMock.object.createYamlFile(filePath, data, force);
     cliPFsMock.verify(x => x.createFile(filePath, yaml, false), TypeMoq.Times.once());
   });
 
   it('override a yaml file (force = true)', async () => {
     const filePath = '/c/tmp/.fabrico.yml';
-    const path = '/c/tmp';
     const data = {
       key: '001',
       value: 'ABC'
     };
     const yaml = `key: '001'\nvalue: ABC\n`;
     const force = true;
-    cliPFsMock.setup(x => x.pathJoin(path, TypeMoq.It.isAnyString())).returns(() => Promise.resolve(filePath));
     cliPFsMock.setup(x => x.pathExists(filePath)).returns(() => Promise.resolve(true));
-    await cliPFsMock.object.createYamlFile(path, data, force);
-    cliPFsMock.verify(x => x.pathJoin(path, TypeMoq.It.isAnyString()), TypeMoq.Times.once());
+    cliPFsMock.setup(x => x.createFile(filePath, yaml, false)).returns(() => Promise.resolve());
+    await cliPFsMock.object.createYamlFile(filePath, data, force);
     cliPFsMock.verify(x => x.pathExists(filePath), TypeMoq.Times.once());
     cliPFsMock.verify(x => x.remove(filePath), TypeMoq.Times.once());
     cliPFsMock.verify(x => x.createFile(filePath, yaml, false), TypeMoq.Times.once());
@@ -60,22 +56,19 @@ describe('CliPhysicalFileSystem should', () => {
 
   it('override a yaml file (force = false)', async () => {
     const filePath = '/c/tmp/.fabrico.yml';
-    const path = '/c/tmp';
     const data = {
       key: '001',
       value: 'ABC'
     };
     const yaml = `key: '001'\nvalue: ABC\n`;
     const force = false;
-    cliPFsMock.setup(x => x.pathJoin(path, TypeMoq.It.isAnyString())).returns(() => Promise.resolve(filePath));
     cliPFsMock.setup(x => x.pathExists(filePath)).returns(() => Promise.resolve(true));
     try {
-      await cliPFsMock.object.createYamlFile(path, data, force);
+      await cliPFsMock.object.createYamlFile(filePath, data, force);
       expect(true).eq(false, 'An exception was not thrown');
     } catch (e) {
       expect(e.message).eq('File already exist (/c/tmp/.fabrico.yml).');
     }
-    cliPFsMock.verify(x => x.pathJoin(path, TypeMoq.It.isAnyString()), TypeMoq.Times.once());
     cliPFsMock.verify(x => x.pathExists(filePath), TypeMoq.Times.once());
   });
 

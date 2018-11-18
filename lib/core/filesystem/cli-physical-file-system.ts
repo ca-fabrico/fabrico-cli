@@ -38,10 +38,9 @@ export class CliPhysicalFileSystem implements IPhysicalFileSystem {
     return fs.appendFile(filePath, data);
   }
 
-  createYamlFile(path: string, data: any, force: boolean): Promise<void> {
+  createYamlFile(filePath: string, data: any, force: boolean): Promise<void> {
    return new Promise(async (resolve, reject) => {
       const yaml = this._yamlJs.safeDump(data);
-      const filePath = await this.pathJoin(path, '.fabrico.yml');
       const fileExist = await this.pathExists(filePath);
       if (fileExist) {
         if (force) {

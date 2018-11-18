@@ -29,10 +29,14 @@ describe('CliProject should', () => {
 
   it('save the metadata', async () => {
     const workingPath = '/c/tmp';
+    const fileName = '.fabrico.yml';
+    const filePath = '/c/tmp/.fabrico.yml';
     const metadata = { version: '1.0.0' } as Metadata;
     const force = true;
+    physicalFileSystemMock.setup(x => x.pathJoin(workingPath, fileName)).returns(() => Promise.resolve(filePath));
     await cliProj.saveMetaData(workingPath, metadata, force);
-    physicalFileSystemMock.verify(x => x.createYamlFile(workingPath, metadata, force), TypeMoq.Times.once());
+    physicalFileSystemMock.verify(x => x.pathJoin(workingPath, fileName), TypeMoq.Times.once());
+    physicalFileSystemMock.verify(x => x.createYamlFile(filePath, metadata, force), TypeMoq.Times.once());
   });
 
 });
