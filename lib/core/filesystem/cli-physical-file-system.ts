@@ -19,7 +19,7 @@ export class CliPhysicalFileSystem implements IPhysicalFileSystem {
   private _path = require('path');
 
   pathJoin(...path: string[]): Promise<string> {
-    return this._path.join(path);
+    return this._path.join(...path);
   }
 
   pathExists(path: string): Promise<boolean> {
