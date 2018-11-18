@@ -21,6 +21,7 @@ describe('GenActions should', () => {
   let genAct: GenActions;
 
   beforeEach(() => {
+    genCommandMock.reset();
     // Mock object must be thenable https://github.com/florinn/typemoq/issues/66
     genCommandMock.setup((x: any) => x.then).returns(() => undefined);
     genAct = new GenActions(genCommandMock.object);

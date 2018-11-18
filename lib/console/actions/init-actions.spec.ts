@@ -23,6 +23,7 @@ describe('InitActions should', () => {
   let initAct: InitActions;
 
   beforeEach(() => {
+    initCommandMock.reset();
     // Mock object must be thenable https://github.com/florinn/typemoq/issues/66
     initCommandMock.setup((x: any) => x.then).returns(() => undefined);
     initAct = new InitActions(systemMock.object, initCommandMock.object);

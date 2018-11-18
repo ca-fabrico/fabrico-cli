@@ -21,6 +21,7 @@ describe('CliProject should', () => {
   let cliProj: CliProject;
 
   beforeEach(() => {
+    physicalFileSystemMock.reset();
     // Mock object must be thenable https://github.com/florinn/typemoq/issues/66
     physicalFileSystemMock.setup((x: any) => x.then).returns(() => undefined);
     cliProj = new CliProject(physicalFileSystemMock.object);

@@ -21,6 +21,7 @@ describe('InitCommand should', () => {
   let initCmd: InitCommand;
 
   beforeEach(() => {
+    projectMock.reset();
     // Mock object must be thenable https://github.com/florinn/typemoq/issues/66
     projectMock.setup((x: any) => x.then).returns(() => undefined);
     initCmd = new InitCommand(projectMock.object);

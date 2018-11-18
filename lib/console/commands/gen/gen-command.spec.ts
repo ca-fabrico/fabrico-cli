@@ -22,6 +22,7 @@ describe('GenCommand should', () => {
   let genCmd: GenCommand;
 
   beforeEach(() => {
+    seedGenMock.reset();
     // Mock object must be thenable https://github.com/florinn/typemoq/issues/66
     seedGenMock.setup((x: any) => x.then).returns(() => undefined);
     genCmd = new GenCommand(seedLoaderMock.object);
