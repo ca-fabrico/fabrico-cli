@@ -40,7 +40,7 @@ export class CliPhysicalFileSystem implements IPhysicalFileSystem {
 
   createYamlFile(filePath: string, data: any, force: boolean): Promise<void> {
    return new Promise(async (resolve, reject) => {
-
+      const yaml = this._yamlJs.dump(data);
       const fileExist = await this.pathExists(filePath);
       if (fileExist) {
         if (force) {
