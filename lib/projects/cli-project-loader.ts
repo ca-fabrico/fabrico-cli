@@ -18,7 +18,7 @@ export class CliProject extends Project {
     super();
   }
 
-  protected async onSaveMetaData(workingPath: string, metaData: Metadata, force: boolean): Promise<void> {
+  public async onSaveMetaData(workingPath: string, metaData: Metadata, force: boolean): Promise<void> {
     const filePath = await this.physicalFileSystem.pathJoin(workingPath, '.fabrico.yml');
     await this.physicalFileSystem.createYamlFile(filePath, metaData, force);
   }
