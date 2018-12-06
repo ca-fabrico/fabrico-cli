@@ -12,8 +12,3 @@ This manifest intends to outline a methodology for enterprise applications devel
 | ![macOS](docs/images/os/apple_med.png) **macOS**   | *not configured yet*                                                                                         |
 | ![Linux](docs/images/os/linux_med.png) **Linux**   | *not configured yet*                                                                                         |
 
-## More Documentation
-
-[Documentation Here](docs/index.md)
-
-Run the docs: docker run --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material
