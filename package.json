@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://tfs.codearchitects.com:8088/tfs/Code%20Architects/CA-Fabrico/_git/fabrico-cli"
+    "url": "https://github.com/ca-fabrico/fabrico-cli.git"
   },
   "preferGlobal": true,
   "main": "./bin/index.js",
